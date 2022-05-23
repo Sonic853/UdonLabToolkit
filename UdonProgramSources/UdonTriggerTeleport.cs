@@ -13,9 +13,7 @@ namespace UdonLab.Toolkit
         public override void OnPlayerTriggerEnter(VRCPlayerApi player)
         {
             if (player.isLocal && posTransform != null)
-            {
                 Networking.LocalPlayer.TeleportTo(posTransform.position, posTransform.rotation);
-            }
         }
     }
 }
