@@ -16,7 +16,12 @@ namespace UdonLab.Toolkit
         public bool showTimer = false;
         public bool enableTimer = false;
         public string timerText = "";
+        string originalTimerText = "";
         [SerializeField] private Text _timerText;
+        void Start()
+        {
+            originalTimerText = timerText;
+        }
         public void Update()
         {
             if (showTimer && enableTimer)
@@ -32,7 +37,7 @@ namespace UdonLab.Toolkit
                 }
                 timeSpan = timeNow - startTime;
                 // timerText = timeSpan.ToString("hh:mm:ss.fff");
-                timerText = timeSpan.Hours.ToString("00") + ":" + timeSpan.Minutes.ToString("00") + ":" + timeSpan.Seconds.ToString("00") + "." + timeSpan.Milliseconds.ToString("000");
+                timerText = GetTimerText(timeSpan);
                 if (_timerText != null)
                 {
                     _timerText.text = timerText;
@@ -53,7 +58,7 @@ namespace UdonLab.Toolkit
                 endTime = _timeMachine.Now;
             }
             timeSpan = TimeSpan.Zero;
-            timerText = timeSpan.Hours.ToString("00") + ":" + timeSpan.Minutes.ToString("00") + ":" + timeSpan.Seconds.ToString("00") + "." + timeSpan.Milliseconds.ToString("000");
+            timerText = GetTimerText(timeSpan);
             if (_timerText != null)
             {
                 _timerText.text = timerText;
@@ -77,11 +82,21 @@ namespace UdonLab.Toolkit
                 endTime = _timeMachine.Now;
             }
             timeSpan = endTime - startTime;
-            timerText = timeSpan.Hours.ToString("00") + ":" + timeSpan.Minutes.ToString("00") + ":" + timeSpan.Seconds.ToString("00") + "." + timeSpan.Milliseconds.ToString("000");
+            timerText = GetTimerText(timeSpan);
             if (_timerText != null)
             {
                 _timerText.text = timerText;
             }
+        }
+        string GetTimerText(TimeSpan timeSpan)
+        {
+            if (originalTimerText == "")
+                return timeSpan.Hours.ToString("00") + ":" + timeSpan.Minutes.ToString("00") + ":" + timeSpan.Seconds.ToString("00") + "." + timeSpan.Milliseconds.ToString("000");
+            // 转换里面的h、m、s、f格式
+            return originalTimerText.Replace("hh", timeSpan.Hours.ToString("00"))
+                .Replace("mm", timeSpan.Minutes.ToString("00"))
+                .Replace("ss", timeSpan.Seconds.ToString("00"))
+                .Replace("fff", timeSpan.Milliseconds.ToString("000"));
         }
     }
 }

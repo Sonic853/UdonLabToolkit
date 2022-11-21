@@ -9,7 +9,7 @@ namespace UdonLab.Toolkit
     public class TimeMachine : UdonSharpBehaviour
     {
         #region
-        public DateTime Now;
+        [HideInInspector] public DateTime Now;
         [HideInInspector] public int Year;
         /// <summary>
         /// 0 - 11
