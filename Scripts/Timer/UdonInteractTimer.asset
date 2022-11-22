@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UdonInteractTimer
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: feb90077f000ccf4bb809775ca97b52d,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 1e782d0288124604da4aa1227e790385,
     type: 2}
   udonAssembly: 
   assemblyError: 
