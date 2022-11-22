@@ -9,21 +9,21 @@ namespace UdonLab.Toolkit
     public class TimeMachine : UdonSharpBehaviour
     {
         #region
-        [HideInInspector] public DateTime Now;
-        [HideInInspector] public int Year;
+        [NonSerialized] public DateTime Now;
+        [NonSerialized] public int Year;
         /// <summary>
         /// 0 - 11
         /// </summary>
-        [HideInInspector] public int month;
+        [NonSerialized] public int month;
         /// <summary>
         /// 1 - 12
         /// </summary>
-        [HideInInspector] public int Month;
-        [HideInInspector] public int Day;
-        [HideInInspector] public int Hour;
-        [HideInInspector] public int Minute;
-        [HideInInspector] public int Second;
-        [HideInInspector] public int Millisecond;
+        [NonSerialized] public int Month;
+        [NonSerialized] public int Day;
+        [NonSerialized] public int Hour;
+        [NonSerialized] public int Minute;
+        [NonSerialized] public int Second;
+        [NonSerialized] public int Millisecond;
         public bool enableTime = true;
         #endregion
         void Start()
