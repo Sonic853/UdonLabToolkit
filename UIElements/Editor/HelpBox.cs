@@ -137,7 +137,7 @@ namespace UnityEngine.UIElements
         public HelpBox() : this(string.Empty, HelpBoxMessageType.None) {
             // 根据编辑器的主题设置，设置不同的颜色
             var theme = UnityEditor.EditorGUIUtility.isProSkin ? "Dark" : "Light";
-            var styleSheet = UnityEditor.EditorGUIUtility.Load($"Assets/Udon Lab/Toolkit/UIElements/HelpBox.{theme}.uss") as StyleSheet;
+            var styleSheet = UnityEditor.EditorGUIUtility.Load($"Assets/Udon Lab/Toolkit/UIElements/StyleSheets/HelpBox.{theme}.uss") as StyleSheet;
             styleSheets.Add(styleSheet);
         }
 
@@ -150,7 +150,7 @@ namespace UnityEngine.UIElements
         {
             // 根据编辑器的主题设置，设置不同的颜色
             var theme = UnityEditor.EditorGUIUtility.isProSkin ? "Dark" : "Light";
-            var styleSheet = UnityEditor.EditorGUIUtility.Load($"Assets/Udon Lab/Toolkit/UIElements/HelpBox.{theme}.uss") as StyleSheet;
+            var styleSheet = UnityEditor.EditorGUIUtility.Load($"Assets/Udon Lab/Toolkit/UIElements/StyleSheets/HelpBox.{theme}.uss") as StyleSheet;
             styleSheets.Add(styleSheet);
             AddToClassList(ussClassName);
 

@@ -1,0 +1,22 @@
+.CustomEditor{
+    padding-left: 15px;
+}
+.head {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: 20px;
+    -unity-font-style: bold;
+}
+.title {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: 12px;
+    -unity-font-style: bold;
+}
+.tips {
+    margin: 5px;
+    padding: 5px;
+    white-space: Normal;
+    font-size: 11px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
