@@ -1,4 +1,5 @@
-﻿using UdonSharp;
+﻿using System;
+using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
@@ -25,8 +26,10 @@ namespace UdonLab.Toolkit
                 }
             }
         }
-        public override void OnPlayerTriggerEnter(VRCPlayerApi player)
+        [NonSerialized] public VRCPlayerApi _OnPlayerTriggerEnter_VRCPlayerApi = null;
+        public void _OnPlayerTriggerEnter()
         {
+            var player = _OnPlayerTriggerEnter_VRCPlayerApi;
             if (player.isLocal)
             {
                 for (int i = 0; i < _Objects.Length; i++)
@@ -36,8 +39,16 @@ namespace UdonLab.Toolkit
                 }
             }
         }
-        public override void OnPlayerTriggerExit(VRCPlayerApi player)
+        public override void OnPlayerTriggerEnter(VRCPlayerApi player)
         {
+            _OnPlayerTriggerEnter_VRCPlayerApi = player;
+            _OnPlayerTriggerEnter();
+            _OnPlayerTriggerEnter_VRCPlayerApi = null;
+        }
+        [NonSerialized] public VRCPlayerApi _OnPlayerTriggerExit_VRCPlayerApi = null;
+        public void _OnPlayerTriggerExit()
+        {
+            var player = _OnPlayerTriggerExit_VRCPlayerApi;
             if (player.isLocal)
             {
                 for (int i = 0; i < _Objects.Length; i++)
@@ -46,6 +57,12 @@ namespace UdonLab.Toolkit
                         _Objects[i].SetActive(reverse ? !_objActive[i] : _objActive[i]);
                 }
             }
+        }
+        public override void OnPlayerTriggerExit(VRCPlayerApi player)
+        {
+            _OnPlayerTriggerExit_VRCPlayerApi = player;
+            _OnPlayerTriggerExit();
+            _OnPlayerTriggerExit_VRCPlayerApi = null;
         }
     }
 }
