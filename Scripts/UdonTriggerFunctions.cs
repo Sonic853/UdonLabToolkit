@@ -7,7 +7,7 @@ using VRC.Udon;
 
 namespace UdonLab.Toolkit
 {
-    public class UdonInteractFunctions : UdonSharpBehaviour
+    public class UdonTriggerFunctions : UdonSharpBehaviour
     {
         /// <summary>
         /// 需要调用的UdonBehaviour
@@ -32,10 +32,18 @@ namespace UdonLab.Toolkit
         /// <summary>
         /// 是否已触发
         /// </summary>
-        [NonSerialized] private bool _isInteracted = false;
-        public void _Interact()
+        [NonSerialized] private bool _isEntered = false;
+        /// <summary>
+        /// 0：进入 1：退出 2：都触发
+        /// </summary>
+        [Header("0：进入 1：退出 2：都触发")]
+        [Range(0, 2)]
+        [SerializeField] private int triggerType = 0;
+        [NonSerialized] public VRCPlayerApi _OnPlayerTrigger_VRCPlayerApi = null;
+        public void _OnPlayerTrigger()
         {
-            if (isOnce && _isInteracted)
+            if (isOnce && _isEntered
+            || isLocalOnly && !_OnPlayerTrigger_VRCPlayerApi.isLocal)
                 return;
             foreach (var udonBehaviour in udonBehaviours)
             {
@@ -48,18 +56,23 @@ namespace UdonLab.Toolkit
                     udonBehaviour.SendCustomEvent(functionName);
                 }
             }
-            _isInteracted = true;
+            _isEntered = true;
         }
-        public override void Interact()
+        public override void OnPlayerTriggerEnter(VRCPlayerApi player)
         {
-            if (isLocalOnly)
-            {
-                _Interact();
-            }
-            else
-            {
-                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "_Interact");
-            }
+            if (triggerType == 1)
+                return;
+            _OnPlayerTrigger_VRCPlayerApi = player;
+            _OnPlayerTrigger();
+            _OnPlayerTrigger_VRCPlayerApi = null;
+        }
+        public override void OnPlayerTriggerExit(VRCPlayerApi player)
+        {
+            if (triggerType == 0)
+                return;
+            _OnPlayerTrigger_VRCPlayerApi = player;
+            _OnPlayerTrigger();
+            _OnPlayerTrigger_VRCPlayerApi = null;
         }
     }
 }
