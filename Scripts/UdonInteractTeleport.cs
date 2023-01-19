@@ -10,14 +10,14 @@ namespace UdonLab.Toolkit
         [Header("点击后将玩家传送到以下的位置")]
         [Header("The player will be teleported to the following location after clicking")]
         [SerializeField] private Transform posTransform;
-        public void _Interact()
+        public void Interact_()
         {
             if (posTransform != null)
                 Networking.LocalPlayer.TeleportTo(posTransform.position, posTransform.rotation);
         }
         public override void Interact()
         {
-            _Interact();
+            Interact_();
         }
     }
 }

@@ -26,10 +26,10 @@ namespace UdonLab.Toolkit
                 }
             }
         }
-        [NonSerialized] public VRCPlayerApi _OnPlayerTriggerEnter_VRCPlayerApi = null;
-        public void _OnPlayerTriggerEnter()
+        [NonSerialized] public VRCPlayerApi OnPlayerTriggerEnter_VRCPlayerApi_ = null;
+        public void OnPlayerTriggerEnter_()
         {
-            var player = _OnPlayerTriggerEnter_VRCPlayerApi;
+            var player = OnPlayerTriggerEnter_VRCPlayerApi_;
             if (player.isLocal)
             {
                 for (int i = 0; i < _Objects.Length; i++)
@@ -41,14 +41,14 @@ namespace UdonLab.Toolkit
         }
         public override void OnPlayerTriggerEnter(VRCPlayerApi player)
         {
-            _OnPlayerTriggerEnter_VRCPlayerApi = player;
-            _OnPlayerTriggerEnter();
-            _OnPlayerTriggerEnter_VRCPlayerApi = null;
+            OnPlayerTriggerEnter_VRCPlayerApi_ = player;
+            OnPlayerTriggerEnter_();
+            OnPlayerTriggerEnter_VRCPlayerApi_ = null;
         }
-        [NonSerialized] public VRCPlayerApi _OnPlayerTriggerExit_VRCPlayerApi = null;
-        public void _OnPlayerTriggerExit()
+        [NonSerialized] public VRCPlayerApi OnPlayerTriggerExit_VRCPlayerApi_ = null;
+        public void OnPlayerTriggerExit_()
         {
-            var player = _OnPlayerTriggerExit_VRCPlayerApi;
+            var player = OnPlayerTriggerExit_VRCPlayerApi_;
             if (player.isLocal)
             {
                 for (int i = 0; i < _Objects.Length; i++)
@@ -60,9 +60,9 @@ namespace UdonLab.Toolkit
         }
         public override void OnPlayerTriggerExit(VRCPlayerApi player)
         {
-            _OnPlayerTriggerExit_VRCPlayerApi = player;
-            _OnPlayerTriggerExit();
-            _OnPlayerTriggerExit_VRCPlayerApi = null;
+            OnPlayerTriggerExit_VRCPlayerApi_ = player;
+            OnPlayerTriggerExit_();
+            OnPlayerTriggerExit_VRCPlayerApi_ = null;
         }
     }
 }

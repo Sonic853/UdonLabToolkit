@@ -8,7 +8,7 @@ namespace UdonLab.Toolkit
     public class UdonInteractObjects : UdonSharpBehaviour
     {
         [SerializeField] private GameObject[] _Objects = new GameObject[0];
-        public void _Interact()
+        public void Interact_()
         {
             for (int i = 0; i < _Objects.Length; i++)
             {
@@ -18,7 +18,7 @@ namespace UdonLab.Toolkit
         }
         public override void Interact()
         {
-            _Interact();
+            Interact_();
         }
     }
 }

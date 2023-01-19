@@ -12,25 +12,25 @@ namespace UdonLab.Toolkit
         [Header("UdonSharpBehaviour")]
         [SerializeField] private UdonBehaviour[] behaviours;
         [SerializeField] private bool isLocalOnly = true;
-        [NonSerialized] public VRCPlayerApi _OnPlayerTriggerEnter_VRCPlayerApi = null;
-        public void _OnPlayerTriggerEnter()
+        [NonSerialized] public VRCPlayerApi OnPlayerTriggerEnter_VRCPlayerApi_ = null;
+        public void OnPlayerTriggerEnter_()
         {
-            var player = _OnPlayerTriggerEnter_VRCPlayerApi;
+            var player = OnPlayerTriggerEnter_VRCPlayerApi_;
             if (isLocalOnly && !player.isLocal)
                 return;
             for (int i = 0; i < behaviours.Length; i++)
             {
                 if (behaviours[i] == null) continue;
-                behaviours[i].SetProgramVariable("_OnPlayerTriggerEnter_VRCPlayerApi", player);
-                behaviours[i].SendCustomEvent("_OnPlayerTriggerEnter");
+                behaviours[i].SetProgramVariable("OnPlayerTriggerEnter_VRCPlayerApi_", player);
+                behaviours[i].SendCustomEvent("OnPlayerTriggerEnter_");
             }
             gameObject.SetActive(false);
         }
         public override void OnPlayerTriggerEnter(VRCPlayerApi player)
         {
-            _OnPlayerTriggerEnter_VRCPlayerApi = player;
-            _OnPlayerTriggerEnter();
-            _OnPlayerTriggerEnter_VRCPlayerApi = null;
+            OnPlayerTriggerEnter_VRCPlayerApi_ = player;
+            OnPlayerTriggerEnter_();
+            OnPlayerTriggerEnter_VRCPlayerApi_ = null;
         }
     }
 }

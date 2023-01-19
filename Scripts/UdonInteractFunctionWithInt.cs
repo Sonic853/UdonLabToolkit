@@ -43,7 +43,7 @@ namespace UdonLab.Toolkit
         /// 是否已触发
         /// </summary>
         [NonSerialized] private bool _isInteracted = false;
-        public void _Interact()
+        public void Interact_()
         {
             if (isOnce && _isInteracted)
                 return;
@@ -65,11 +65,11 @@ namespace UdonLab.Toolkit
         {
             if (isLocalOnly)
             {
-                _Interact();
+                Interact_();
             }
             else
             {
-                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "_Interact");
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Interact_");
             }
         }
     }

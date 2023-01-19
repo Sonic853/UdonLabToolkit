@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UdonTriggerFunctions
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 1797b9ff28f2c724db6ea4d581f25531,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 08519a3f81abab040b330b8d034de3a6,
     type: 2}
   udonAssembly: 
   assemblyError: 
@@ -461,13 +461,13 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: _OnPlayerTrigger_VRCPlayerApi
+      Data: OnPlayerTrigger_VRCPlayerApi_
     - Name: $v
       Entry: 7
       Data: 31|UdonSharp.Compiler.FieldDefinition, UdonSharp.Editor
     - Name: <Name>k__BackingField
       Entry: 1
-      Data: _OnPlayerTrigger_VRCPlayerApi
+      Data: OnPlayerTrigger_VRCPlayerApi_
     - Name: <UserType>k__BackingField
       Entry: 7
       Data: 32|System.RuntimeType, mscorlib

@@ -11,18 +11,18 @@ namespace UdonLab.Toolkit
         [Header("进入后将玩家传送到以下的位置")]
         [Header("The player will be teleported to the specified location after entering")]
         [SerializeField] private Transform posTransform;
-        [NonSerialized] public VRCPlayerApi _OnPlayerTriggerEnter_VRCPlayerApi = null;
-        public void _OnPlayerTriggerEnter()
+        [NonSerialized] public VRCPlayerApi OnPlayerTriggerEnter_VRCPlayerApi_ = null;
+        public void OnPlayerTriggerEnter_()
         {
-            var player = _OnPlayerTriggerEnter_VRCPlayerApi;
+            var player = OnPlayerTriggerEnter_VRCPlayerApi_;
             if (player.isLocal && posTransform != null)
                 Networking.LocalPlayer.TeleportTo(posTransform.position, posTransform.rotation);
         }
         public override void OnPlayerTriggerEnter(VRCPlayerApi player)
         {
-            _OnPlayerTriggerEnter_VRCPlayerApi = player;
-            _OnPlayerTriggerEnter();
-            _OnPlayerTriggerEnter_VRCPlayerApi = null;
+            OnPlayerTriggerEnter_VRCPlayerApi_ = player;
+            OnPlayerTriggerEnter_();
+            OnPlayerTriggerEnter_VRCPlayerApi_ = null;
         }
     }
 }

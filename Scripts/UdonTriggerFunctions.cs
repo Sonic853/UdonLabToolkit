@@ -39,11 +39,11 @@ namespace UdonLab.Toolkit
         [Header("0：进入 1：退出 2：都触发")]
         [Range(0, 2)]
         [SerializeField] private int triggerType = 0;
-        [NonSerialized] public VRCPlayerApi _OnPlayerTrigger_VRCPlayerApi = null;
-        public void _OnPlayerTrigger()
+        [NonSerialized] public VRCPlayerApi OnPlayerTrigger_VRCPlayerApi_ = null;
+        public void OnPlayerTrigger_()
         {
             if (isOnce && _isEntered
-            || isLocalOnly && !_OnPlayerTrigger_VRCPlayerApi.isLocal)
+            || isLocalOnly && !OnPlayerTrigger_VRCPlayerApi_.isLocal)
                 return;
             foreach (var udonBehaviour in udonBehaviours)
             {
@@ -62,17 +62,17 @@ namespace UdonLab.Toolkit
         {
             if (triggerType == 1)
                 return;
-            _OnPlayerTrigger_VRCPlayerApi = player;
-            _OnPlayerTrigger();
-            _OnPlayerTrigger_VRCPlayerApi = null;
+            OnPlayerTrigger_VRCPlayerApi_ = player;
+            OnPlayerTrigger_();
+            OnPlayerTrigger_VRCPlayerApi_ = null;
         }
         public override void OnPlayerTriggerExit(VRCPlayerApi player)
         {
             if (triggerType == 0)
                 return;
-            _OnPlayerTrigger_VRCPlayerApi = player;
-            _OnPlayerTrigger();
-            _OnPlayerTrigger_VRCPlayerApi = null;
+            OnPlayerTrigger_VRCPlayerApi_ = player;
+            OnPlayerTrigger_();
+            OnPlayerTrigger_VRCPlayerApi_ = null;
         }
     }
 }
