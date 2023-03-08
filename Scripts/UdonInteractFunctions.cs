@@ -15,9 +15,9 @@ namespace UdonLab.Toolkit
         [Header("需要调用的UdonBehaviour")]
         [SerializeField] private UdonBehaviour[] udonBehaviours;
         /// <summary>
-        /// 进入后将调用以下的函数
+        /// 触发后将调用以下的函数
         /// </summary>
-        [Header("进入后将调用以下的函数")]
+        [Header("触发后将调用以下的函数")]
         [SerializeField] private string[] functionNames;
         /// <summary>
         /// 只允许本地玩家触发
@@ -37,16 +37,26 @@ namespace UdonLab.Toolkit
         {
             if (isOnce && _isInteracted)
                 return;
-            foreach (var udonBehaviour in udonBehaviours)
+            // foreach (var udonBehaviour in udonBehaviours)
+            // {
+            //     if (udonBehaviour == null)
+            //         continue;
+            //     foreach (var functionName in functionNames)
+            //     {
+            //         if (string.IsNullOrEmpty(functionName))
+            //             continue;
+            //         udonBehaviour.SendCustomEvent(functionName);
+            //     }
+            // }
+            for (int i = 0; i < udonBehaviours.Length; i++)
             {
-                if (udonBehaviour == null)
+                if (udonBehaviours[i] == null)
                     continue;
-                foreach (var functionName in functionNames)
-                {
-                    if (string.IsNullOrEmpty(functionName))
-                        continue;
-                    udonBehaviour.SendCustomEvent(functionName);
-                }
+                if (i >= functionNames.Length)
+                    break;
+                if (string.IsNullOrEmpty(functionNames[i]))
+                    continue;
+                udonBehaviours[i].SendCustomEvent(functionNames[i]);
             }
             _isInteracted = true;
         }

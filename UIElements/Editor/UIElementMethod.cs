@@ -47,9 +47,9 @@ namespace UdonLab.QuickUIElement
             var property = target.GetType().GetProperty(bindingPath, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
             if (field != null || property != null)
             {
-                var headerAttribute = field != null
-                ? Attribute.GetCustomAttribute(field, typeof(HeaderAttribute)) as HeaderAttribute
-                : Attribute.GetCustomAttribute(property, typeof(HeaderAttribute)) as HeaderAttribute;
+                var headerAttribute = Attribute.GetCustomAttribute(field, typeof(HeaderAttribute)) as HeaderAttribute
+                ?? Attribute.GetCustomAttribute(property, typeof(HeaderAttribute)) as HeaderAttribute
+                ?? null;
                 if (headerAttribute != null) pfk.label = CreateTitle(headerAttribute.header);
             }
             return pfk;
@@ -71,9 +71,9 @@ namespace UdonLab.QuickUIElement
                 ofk.propertyField.objectType = field != null
                 ? field.FieldType
                 : property.PropertyType;
-                var headerAttribute = field != null
-                ? Attribute.GetCustomAttribute(field, typeof(HeaderAttribute)) as HeaderAttribute
-                : Attribute.GetCustomAttribute(property, typeof(HeaderAttribute)) as HeaderAttribute;
+                var headerAttribute = Attribute.GetCustomAttribute(field, typeof(HeaderAttribute)) as HeaderAttribute
+                ?? Attribute.GetCustomAttribute(property, typeof(HeaderAttribute)) as HeaderAttribute
+                ?? null;
                 if (headerAttribute != null) ofk.label = CreateTitle(headerAttribute.header);
             }
             ofk.propertyField.value = serializedObject.FindProperty(bindingPath).objectReferenceValue;

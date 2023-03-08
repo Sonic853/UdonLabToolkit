@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UdonInteractFunctions
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 8df64082430e8fa4bbd37d366cd08015,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 193b65b7f9caf1e43b9bbcacaa9f7598,
     type: 2}
   udonAssembly: 
   assemblyError: 
@@ -167,7 +167,7 @@ MonoBehaviour:
       Data: 11|UnityEngine.HeaderAttribute, UnityEngine.CoreModule
     - Name: header
       Entry: 1
-      Data: "\u8FDB\u5165\u540E\u5C06\u8C03\u7528\u4EE5\u4E0B\u7684\u51FD\u6570"
+      Data: "\u89E6\u53D1\u540E\u5C06\u8C03\u7528\u4EE5\u4E0B\u7684\u51FD\u6570"
     - Name: 
       Entry: 8
       Data: 
