@@ -44,10 +44,13 @@ namespace UdonLab.QuickUIElement
             };
             pfk.propertyField.Bind(serializedObject);
             var field = target.GetType().GetField(bindingPath, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-            if (field != null)
+            var property = target.GetType().GetProperty(bindingPath, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            if (field != null || property != null)
             {
-                var headerAttribute = Attribute.GetCustomAttribute(field, typeof(HeaderAttribute)) as HeaderAttribute;
-                pfk.label = headerAttribute != null ? CreateTitle(headerAttribute.header) : null;
+                var headerAttribute = field != null
+                ? Attribute.GetCustomAttribute(field, typeof(HeaderAttribute)) as HeaderAttribute
+                : Attribute.GetCustomAttribute(property, typeof(HeaderAttribute)) as HeaderAttribute;
+                if (headerAttribute != null) pfk.label = CreateTitle(headerAttribute.header);
             }
             return pfk;
         }
@@ -62,11 +65,16 @@ namespace UdonLab.QuickUIElement
                 label = label,
             };
             var field = target.GetType().GetField(bindingPath, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-            if (field != null)
+            var property = target.GetType().GetProperty(bindingPath, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            if (field != null || property != null)
             {
-                ofk.propertyField.objectType = field.FieldType;
-                var headerAttribute = Attribute.GetCustomAttribute(field, typeof(HeaderAttribute)) as HeaderAttribute;
-                ofk.label = headerAttribute != null ? CreateTitle(headerAttribute.header) : null;
+                ofk.propertyField.objectType = field != null
+                ? field.FieldType
+                : property.PropertyType;
+                var headerAttribute = field != null
+                ? Attribute.GetCustomAttribute(field, typeof(HeaderAttribute)) as HeaderAttribute
+                : Attribute.GetCustomAttribute(property, typeof(HeaderAttribute)) as HeaderAttribute;
+                if (headerAttribute != null) ofk.label = CreateTitle(headerAttribute.header);
             }
             ofk.propertyField.value = serializedObject.FindProperty(bindingPath).objectReferenceValue;
             // ofk.propertyField.BindProperty(serializedObject.FindProperty(bindingPath));
@@ -89,9 +97,25 @@ namespace UdonLab.QuickUIElement
             {
                 // 判断 bindingPath 是否为 UnityEngine.Object 类型
                 var field = target.GetType().GetField(bindingPath, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+                var property = target.GetType().GetProperty(bindingPath, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
                 if (field != null)
                 {
                     if (field.FieldType.IsSubclassOf(typeof(UnityEngine.Object)))
+                    {
+                        var ofk = CreateObjectField(target, bindingPath, label);
+                        cehk.label = ofk.label;
+                        cehk.propertyField = ofk.propertyField;
+                    }
+                    else
+                    {
+                        var pfk = CreatePropertyField(target, bindingPath, label);
+                        cehk.label = pfk.label;
+                        cehk.propertyField = pfk.propertyField;
+                    }
+                }
+                else if (property != null)
+                {
+                    if (property.PropertyType.IsSubclassOf(typeof(UnityEngine.Object)))
                     {
                         var ofk = CreateObjectField(target, bindingPath, label);
                         cehk.label = ofk.label;

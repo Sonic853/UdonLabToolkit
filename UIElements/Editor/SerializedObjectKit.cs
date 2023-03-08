@@ -6,83 +6,112 @@ namespace UdonLab.EditorUI
 {
     public class SerializedObjectKit
     {
-        public static T GetSerializedObject<T>(UnityEngine.Object unityObject, string propertyName) where T : UnityEngine.Object
+        public static T GetSerializedObject<T>(UnityEngine.Object unityObject, string propertyName) where T : class
         {
             var serializedObject = new SerializedObject(unityObject);
-            var prop = serializedObject.FindProperty(propertyName);
-            if (prop != null)
-            {
-                return prop.objectReferenceValue as T;
-            }
-            return null;
+            return GetSerializedObject<T>(serializedObject, propertyName);
         }
-        public static T GetSerializedObject<T>(SerializedObject serializedObject, string propertyName) where T : UnityEngine.Object
+        public static T GetSerializedObject<T>(SerializedObject serializedObject, string propertyName) where T : class
         {
             var prop = serializedObject.FindProperty(propertyName);
             if (prop != null)
             {
-                return prop.objectReferenceValue as T;
+                if (prop.propertyType == SerializedPropertyType.ObjectReference)
+                {
+                    return prop.objectReferenceValue as T;
+                }
+                switch (prop.propertyType)
+                {
+                    case SerializedPropertyType.Integer:
+                        {
+                            return prop.intValue as T;
+                        }
+                    case SerializedPropertyType.Boolean:
+                        {
+                            return prop.boolValue as T;
+                        }
+                    case SerializedPropertyType.Float:
+                        {
+                            return prop.floatValue as T;
+                        }
+                    case SerializedPropertyType.String:
+                        {
+                            return prop.stringValue as T;
+                        }
+                    case SerializedPropertyType.Color:
+                        {
+                            return prop.colorValue as T;
+                        }
+                    case SerializedPropertyType.Enum:
+                        {
+                            return prop.enumValueIndex as T;
+                        }
+                    case SerializedPropertyType.Vector2:
+                        {
+                            return prop.vector2Value as T;
+                        }
+                    case SerializedPropertyType.Vector3:
+                        {
+                            return prop.vector3Value as T;
+                        }
+                    case SerializedPropertyType.Vector4:
+                        {
+                            return prop.vector4Value as T;
+                        }
+                    case SerializedPropertyType.Rect:
+                        {
+                            return prop.rectValue as T;
+                        }
+                    case SerializedPropertyType.Character:
+                        {
+                            return prop.intValue as T;
+                        }
+                    case SerializedPropertyType.AnimationCurve:
+                        {
+                            return prop.animationCurveValue as T;
+                        }
+                    case SerializedPropertyType.Bounds:
+                        {
+                            return prop.boundsValue as T;
+                        }
+                    case SerializedPropertyType.Quaternion:
+                        {
+                            return prop.quaternionValue as T;
+                        }
+                    case SerializedPropertyType.ExposedReference:
+                        {
+                            return prop.exposedReferenceValue as T;
+                        }
+                    case SerializedPropertyType.FixedBufferSize:
+                        {
+                            return prop.fixedBufferSize as T;
+                        }
+                    case SerializedPropertyType.Vector2Int:
+                        {
+                            return prop.vector2IntValue as T;
+                        }
+                    case SerializedPropertyType.Vector3Int:
+                        {
+                            return prop.vector3IntValue as T;
+                        }
+                    case SerializedPropertyType.RectInt:
+                        {
+                            return prop.rectIntValue as T;
+                        }
+                    case SerializedPropertyType.BoundsInt:
+                        {
+                            return prop.boundsIntValue as T;
+                        }
+                    default:
+                        break;
+                }
             }
-            return null;
+            return default(T);
         }
         public static object GetSerializedObject(UnityEngine.Object unityObject, string propertyName)
         {
             var serializedObject = new SerializedObject(unityObject);
-            var prop = serializedObject.FindProperty(propertyName);
-            if (prop != null)
-            {
-                switch (prop.propertyType)
-                {
-                    case SerializedPropertyType.ObjectReference:
-                        return prop.objectReferenceValue;
-                    case SerializedPropertyType.Integer:
-                        return prop.intValue;
-                    case SerializedPropertyType.Boolean:
-                        return prop.boolValue;
-                    case SerializedPropertyType.Float:
-                        return prop.floatValue;
-                    case SerializedPropertyType.String:
-                        return prop.stringValue;
-                    case SerializedPropertyType.Color:
-                        return prop.colorValue;
-                    case SerializedPropertyType.Enum:
-                        return prop.enumValueIndex;
-                    case SerializedPropertyType.Vector2:
-                        return prop.vector2Value;
-                    case SerializedPropertyType.Vector3:
-                        return prop.vector3Value;
-                    case SerializedPropertyType.Vector4:
-                        return prop.vector4Value;
-                    case SerializedPropertyType.Rect:
-                        return prop.rectValue;
-                    case SerializedPropertyType.ArraySize:
-                        return prop.arraySize;
-                    case SerializedPropertyType.Character:
-                        return prop.intValue;
-                    case SerializedPropertyType.AnimationCurve:
-                        return prop.animationCurveValue;
-                    case SerializedPropertyType.Bounds:
-                        return prop.boundsValue;
-                    case SerializedPropertyType.Quaternion:
-                        return prop.quaternionValue;
-                    case SerializedPropertyType.ExposedReference:
-                        return prop.exposedReferenceValue;
-                    case SerializedPropertyType.FixedBufferSize:
-                        return prop.fixedBufferSize;
-                    case SerializedPropertyType.Vector2Int:
-                        return prop.vector2IntValue;
-                    case SerializedPropertyType.Vector3Int:
-                        return prop.vector3IntValue;
-                    case SerializedPropertyType.RectInt:
-                        return prop.rectIntValue;
-                    case SerializedPropertyType.BoundsInt:
-                        return prop.boundsIntValue;
-                    default:
-                        return null;
-                }
-                // return prop.objectReferenceValue as object;
-            }
-            return null;
+            return GetSerializedObject(serializedObject, propertyName);
         }
         public static object GetSerializedObject(SerializedObject serializedObject, string propertyName)
         {
@@ -402,29 +431,12 @@ namespace UdonLab.EditorUI
             }
             return list.ToArray();
         }
-        public static List<T> GetSerializedObjectList<T>(UnityEngine.Object unityObject, string propertyName, bool allowNull = false) where T : UnityEngine.Object
+        public static List<T> GetSerializedObjectList<T>(UnityEngine.Object unityObject, string propertyName, bool allowNull = false) where T : class
         {
             var serializedObject = new SerializedObject(unityObject);
-            var prop = serializedObject.FindProperty(propertyName);
-            var list = new List<T>();
-            if (prop != null)
-            {
-                for (int i = 0; i < prop.arraySize; i++)
-                {
-                    var element = prop.GetArrayElementAtIndex(i);
-                    if (element != null)
-                    {
-                        var value = element.objectReferenceValue as T;
-                        if (value != null || allowNull)
-                        {
-                            list.Add(value);
-                        }
-                    }
-                }
-            }
-            return list;
+            return GetSerializedObjectList<T>(serializedObject, propertyName, allowNull);
         }
-        public static List<T> GetSerializedObjectList<T>(SerializedObject serializedObject, string propertyName, bool allowNull = false) where T : UnityEngine.Object
+        public static List<T> GetSerializedObjectList<T>(SerializedObject serializedObject, string propertyName, bool allowNull = false) where T : class
         {
             var prop = serializedObject.FindProperty(propertyName);
             var list = new List<T>();
@@ -435,7 +447,123 @@ namespace UdonLab.EditorUI
                     var element = prop.GetArrayElementAtIndex(i);
                     if (element != null)
                     {
-                        var value = element.objectReferenceValue as T;
+                        T value = default(T);
+                        if (element.propertyType == SerializedPropertyType.ObjectReference)
+                        {
+                            value = element.objectReferenceValue as T;
+                            if (value != null || allowNull)
+                            {
+                                list.Add(value);
+                            }
+                        }
+                        else
+                        {
+                            switch (element.propertyType)
+                            {
+                                case SerializedPropertyType.Integer:
+                                    {
+                                        value = element.intValue as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.Boolean:
+                                    {
+                                        value = element.boolValue as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.Float:
+                                    {
+                                        value = element.floatValue as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.String:
+                                    {
+                                        value = element.stringValue as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.Color:
+                                    {
+                                        value = element.colorValue as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.Enum:
+                                    {
+                                        value = element.enumValueIndex as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.Vector2:
+                                    {
+                                        value = element.vector2Value as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.Vector3:
+                                    {
+                                        value = element.vector3Value as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.Vector4:
+                                    {
+                                        value = element.vector4Value as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.Rect:
+                                    {
+                                        value = element.rectValue as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.Character:
+                                    {
+                                        value = element.intValue as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.AnimationCurve:
+                                    {
+                                        value = element.animationCurveValue as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.Bounds:
+                                    {
+                                        value = element.boundsValue as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.Quaternion:
+                                    {
+                                        value = element.quaternionValue as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.ExposedReference:
+                                    {
+                                        value = element.exposedReferenceValue as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.FixedBufferSize:
+                                    {
+                                        value = element.fixedBufferSize as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.Vector2Int:
+                                    {
+                                        value = element.vector2IntValue as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.Vector3Int:
+                                    {
+                                        value = element.vector3IntValue as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.RectInt:
+                                    {
+                                        value = element.rectIntValue as T;
+                                    }
+                                    break;
+                                case SerializedPropertyType.BoundsInt:
+                                    {
+                                        value = element.boundsIntValue as T;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
                         if (value != null || allowNull)
                         {
                             list.Add(value);
@@ -443,7 +571,6 @@ namespace UdonLab.EditorUI
                     }
                 }
             }
-            // Debug.Log($"GetSerializedObjectList<T> {propertyName} {list.Count}");
             return list;
         }
         public static List<object> GetSerializedObjectList(UnityEngine.Object unityObject, string propertyName, bool allowNull = false)
@@ -1085,7 +1212,7 @@ namespace UdonLab.EditorUI
         // }
         // public static void SetSerializedObjectList(SerializedObject serializedObject, string propertyName, object values)
         // {
-            
+
         //     var prop = serializedObject.FindProperty(propertyName);
         //     if (prop != null)
         //     {
