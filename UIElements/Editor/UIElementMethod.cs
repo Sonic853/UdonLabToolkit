@@ -113,6 +113,39 @@ namespace UdonLab.QuickUIElement
             }
             return cehk;
         }
+        public static string[] GetMethods(UnityEngine.Object target, BindingFlags bindingFlags)
+        {
+            if (target == null) return new string[0];
+            var methods = target.GetType().GetMethods(bindingFlags);
+            string[] methodNames = new string[methods.Length];
+            for (int i = 0; i < methods.Length; i++)
+            {
+                methodNames[i] = methods[i].Name;
+            }
+            return methodNames;
+        }
+        public static string[] GetFields(UnityEngine.Object target, BindingFlags bindingFlags)
+        {
+            if (target == null) return new string[0];
+            var fields = target.GetType().GetFields(bindingFlags);
+            string[] fieldNames = new string[fields.Length];
+            for (int i = 0; i < fields.Length; i++)
+            {
+                fieldNames[i] = fields[i].Name;
+            }
+            return fieldNames;
+        }
+        public static string[] GetProperties(UnityEngine.Object target, BindingFlags bindingFlags)
+        {
+            if (target == null) return new string[0];
+            var properties = target.GetType().GetProperties(bindingFlags);
+            string[] propertyNames = new string[properties.Length];
+            for (int i = 0; i < properties.Length; i++)
+            {
+                propertyNames[i] = properties[i].Name;
+            }
+            return propertyNames;
+        }
         public class PropertyFieldKit
         {
             public Label label = null;
