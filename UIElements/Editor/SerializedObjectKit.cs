@@ -411,10 +411,6 @@ namespace UdonLab.EditorUI
                         if (element.propertyType == SerializedPropertyType.ObjectReference)
                         {
                             value = element.objectReferenceValue as T;
-                            if (value != null || allowNull)
-                            {
-                                list.Add(value);
-                            }
                         }
                         else
                         {
