@@ -23,85 +23,45 @@ namespace UdonLab.EditorUI
                 switch (prop.propertyType)
                 {
                     case SerializedPropertyType.Integer:
-                        {
-                            return prop.intValue as T;
-                        }
+                        return prop.intValue as T;
                     case SerializedPropertyType.Boolean:
-                        {
-                            return prop.boolValue as T;
-                        }
+                        return prop.boolValue as T;
                     case SerializedPropertyType.Float:
-                        {
-                            return prop.floatValue as T;
-                        }
+                        return prop.floatValue as T;
                     case SerializedPropertyType.String:
-                        {
-                            return prop.stringValue as T;
-                        }
+                        return prop.stringValue as T;
                     case SerializedPropertyType.Color:
-                        {
-                            return prop.colorValue as T;
-                        }
+                        return prop.colorValue as T;
                     case SerializedPropertyType.Enum:
-                        {
-                            return prop.enumValueIndex as T;
-                        }
+                        return prop.enumValueIndex as T;
                     case SerializedPropertyType.Vector2:
-                        {
-                            return prop.vector2Value as T;
-                        }
+                        return prop.vector2Value as T;
                     case SerializedPropertyType.Vector3:
-                        {
-                            return prop.vector3Value as T;
-                        }
+                        return prop.vector3Value as T;
                     case SerializedPropertyType.Vector4:
-                        {
-                            return prop.vector4Value as T;
-                        }
+                        return prop.vector4Value as T;
                     case SerializedPropertyType.Rect:
-                        {
-                            return prop.rectValue as T;
-                        }
+                        return prop.rectValue as T;
                     case SerializedPropertyType.Character:
-                        {
-                            return prop.intValue as T;
-                        }
+                        return prop.intValue as T;
                     case SerializedPropertyType.AnimationCurve:
-                        {
-                            return prop.animationCurveValue as T;
-                        }
+                        return prop.animationCurveValue as T;
                     case SerializedPropertyType.Bounds:
-                        {
-                            return prop.boundsValue as T;
-                        }
+                        return prop.boundsValue as T;
                     case SerializedPropertyType.Quaternion:
-                        {
-                            return prop.quaternionValue as T;
-                        }
+                        return prop.quaternionValue as T;
                     case SerializedPropertyType.ExposedReference:
-                        {
-                            return prop.exposedReferenceValue as T;
-                        }
+                        return prop.exposedReferenceValue as T;
                     case SerializedPropertyType.FixedBufferSize:
-                        {
-                            return prop.fixedBufferSize as T;
-                        }
+                        return prop.fixedBufferSize as T;
                     case SerializedPropertyType.Vector2Int:
-                        {
-                            return prop.vector2IntValue as T;
-                        }
+                        return prop.vector2IntValue as T;
                     case SerializedPropertyType.Vector3Int:
-                        {
-                            return prop.vector3IntValue as T;
-                        }
+                        return prop.vector3IntValue as T;
                     case SerializedPropertyType.RectInt:
-                        {
-                            return prop.rectIntValue as T;
-                        }
+                        return prop.rectIntValue as T;
                     case SerializedPropertyType.BoundsInt:
-                        {
-                            return prop.boundsIntValue as T;
-                        }
+                        return prop.boundsIntValue as T;
                     default:
                         break;
                 }
