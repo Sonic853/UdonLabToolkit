@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UdonShaderMRMColorsToggle
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 5af7420e0fd993841a825aa216336756,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 6034b9c2dfa13774a8aaf865cc4fd6e1,
     type: 2}
   udonAssembly: 
   assemblyError: 

@@ -11,6 +11,7 @@ namespace UdonLab.Toolkit
         [SerializeField] private GameObject[] _Objects = new GameObject[0];
         private bool[] _objActive = new bool[0];
         [SerializeField] private bool reverse;
+        [SerializeField] private bool once;
         void Start()
         {
             _objActive = new bool[_Objects.Length];
@@ -48,6 +49,7 @@ namespace UdonLab.Toolkit
         [NonSerialized] public VRCPlayerApi OnPlayerTriggerExit_VRCPlayerApi_ = null;
         public void OnPlayerTriggerExit_()
         {
+            if (once) return;
             var player = OnPlayerTriggerExit_VRCPlayerApi_;
             if (player.isLocal)
             {

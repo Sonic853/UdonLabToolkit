@@ -32,7 +32,7 @@ namespace UdonLab.QuickUIElement
         {
             return CreateLabel(tips, "tips");
         }
-        public static PropertyFieldKit CreatePropertyField(UnityEngine.Object target, string bindingPath, string label)
+        public static PropertyFieldKit CreatePropertyField(UnityEngine.Object target, string bindingPath, string label, bool forceOverrideLabel = false)
         {
             if (target == null) return null;
             var serializedObject = new SerializedObject(target);
@@ -50,11 +50,11 @@ namespace UdonLab.QuickUIElement
                 var headerAttribute = Attribute.GetCustomAttribute(field, typeof(HeaderAttribute)) as HeaderAttribute
                 ?? Attribute.GetCustomAttribute(property, typeof(HeaderAttribute)) as HeaderAttribute
                 ?? null;
-                if (headerAttribute != null) pfk.label = CreateTitle(headerAttribute.header);
+                if (headerAttribute != null) pfk.label = CreateTitle(forceOverrideLabel ? label : headerAttribute.header);
             }
             return pfk;
         }
-        public static ObjectFieldKit CreateObjectField(UnityEngine.Object target, string bindingPath, string label)
+        public static ObjectFieldKit CreateObjectField(UnityEngine.Object target, string bindingPath, string label, bool forceOverrideLabel = false)
         {
             if (target == null) return null;
             var serializedObject = new SerializedObject(target);
@@ -89,7 +89,7 @@ namespace UdonLab.QuickUIElement
             });
             return ofk;
         }
-        public static VisualElementKit CreateVisualElementHandler(UnityEngine.Object target, string bindingPath, string label, bool isPropertyField = false)
+        public static VisualElementKit CreateVisualElementHandler(UnityEngine.Object target, string bindingPath, string label, bool isPropertyField = false, bool forceOverrideLabel = false)
         {
             if (target == null) return null;
             var cehk = new VisualElementKit();
@@ -134,6 +134,135 @@ namespace UdonLab.QuickUIElement
                 var pfk = CreatePropertyField(target, bindingPath, label);
                 cehk.label = pfk.label;
                 cehk.propertyField = pfk.propertyField;
+            }
+            return cehk;
+        }
+        public static VisualElementKit CreateTField<T>(string name, T value, EventCallback<ChangeEvent<T>> onChange) where T : IConvertible
+        {
+            // 判断 T 类型
+            var cehk = new VisualElementKit();
+            switch (typeof(T).Name)
+            {
+                case "Int32":
+                    var intField = new IntegerField(name);
+                    intField.value = Convert.ToInt32(value);
+                    intField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    cehk.propertyField = intField;
+                    break;
+                case "Single":
+                    var floatField = new FloatField(name);
+                    floatField.value = Convert.ToSingle(value);
+                    floatField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    cehk.propertyField = floatField;
+                    break;
+                case "Int64":
+                    var longField = new LongField(name);
+                    longField.value = Convert.ToInt64(value);
+                    longField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    cehk.propertyField = longField;
+                    break;
+                case "Boolean":
+                    var toggle = new Toggle(name);
+                    toggle.value = Convert.ToBoolean(value);
+                    toggle.RegisterCallback<ChangeEvent<T>>(onChange);
+                    cehk.propertyField = toggle;
+                    break;
+                case "String":
+                    var textField = new TextField(name);
+                    textField.value = Convert.ToString(value);
+                    textField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    cehk.propertyField = textField;
+                    break;
+                default:
+                    break;
+            }
+            return cehk;
+        }
+        public static VisualElementKit CreateUnityTField<T>(string name, T value, EventCallback<ChangeEvent<T>> onChange) where T : class
+        {
+            // 判断 T 类型
+            var cehk = new VisualElementKit();
+            switch (typeof(T).Name)
+            {
+                case "Color":
+                    var colorField = new ColorField(name);
+                    colorField.value = (Color)(object)value;
+                    colorField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    cehk.propertyField = colorField;
+                    break;
+                case "Vector2":
+                    var vector2Field = new Vector2Field(name);
+                    vector2Field.value = (Vector2)(object)value;
+                    vector2Field.RegisterCallback<ChangeEvent<T>>(onChange);
+                    cehk.propertyField = vector2Field;
+                    break;
+                case "Vector3":
+                    var vector3Field = new Vector3Field(name);
+                    vector3Field.value = (Vector3)(object)value;
+                    vector3Field.RegisterCallback<ChangeEvent<T>>(onChange);
+                    cehk.propertyField = vector3Field;
+                    break;
+                case "Vector4":
+                    var vector4Field = new Vector4Field(name);
+                    vector4Field.value = (Vector4)(object)value;
+                    vector4Field.RegisterCallback<ChangeEvent<T>>(onChange);
+                    cehk.propertyField = vector4Field;
+                    break;
+                case "Rect":
+                    var rectField = new RectField(name);
+                    rectField.value = (Rect)(object)value;
+                    rectField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    cehk.propertyField = rectField;
+                    break;
+                case "Bounds":
+                    var boundsField = new BoundsField(name);
+                    boundsField.value = (Bounds)(object)value;
+                    boundsField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    cehk.propertyField = boundsField;
+                    break;
+                case "Vector2Int":
+                    var vector2IntField = new Vector2IntField(name);
+                    vector2IntField.value = (Vector2Int)(object)value;
+                    vector2IntField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    cehk.propertyField = vector2IntField;
+                    break;
+                case "Vector3Int":
+                    var vector3IntField = new Vector3IntField(name);
+                    vector3IntField.value = (Vector3Int)(object)value;
+                    vector3IntField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    cehk.propertyField = vector3IntField;
+                    break;
+                case "RectInt":
+                    var rectIntField = new RectIntField(name);
+                    rectIntField.value = (RectInt)(object)value;
+                    rectIntField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    cehk.propertyField = rectIntField;
+                    break;
+                case "BoundsInt":
+                    var boundsIntField = new BoundsIntField(name);
+                    boundsIntField.value = (BoundsInt)(object)value;
+                    boundsIntField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    cehk.propertyField = boundsIntField;
+                    break;
+                case "AnimationCurve":
+                    var animationCurveField = new CurveField(name);
+                    animationCurveField.value = (AnimationCurve)(object)value;
+                    animationCurveField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    cehk.propertyField = animationCurveField;
+                    break;
+                case "Gradient":
+                    var gradientField = new GradientField(name);
+                    gradientField.value = (Gradient)(object)value;
+                    gradientField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    cehk.propertyField = gradientField;
+                    break;
+                default:
+                    var objectField = new ObjectField(name);
+                    objectField.value = value as UnityEngine.Object;
+                    objectField.objectType = typeof(T);
+                    objectField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    cehk.propertyField = objectField;
+                    break;
             }
             return cehk;
         }

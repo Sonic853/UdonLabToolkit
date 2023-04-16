@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,12 +7,74 @@ namespace UdonLab.EditorUI
 {
     public class SerializedObjectKit
     {
-        public static T GetSerializedObject<T>(UnityEngine.Object unityObject, string propertyName) where T : class
+        public static T GetSerializedObject<T>(UnityEngine.Object unityObject, string propertyName) where T : IConvertible
         {
             var serializedObject = new SerializedObject(unityObject);
             return GetSerializedObject<T>(serializedObject, propertyName);
         }
-        public static T GetSerializedObject<T>(SerializedObject serializedObject, string propertyName) where T : class
+        public static T GetSerializedObject<T>(SerializedObject serializedObject, string propertyName) where T : IConvertible
+        {
+            var prop = serializedObject.FindProperty(propertyName);
+            if (prop != null)
+            {
+                if (prop.propertyType == SerializedPropertyType.ObjectReference)
+                {
+                    return (T)System.Convert.ChangeType(prop.objectReferenceValue, typeof(T));
+                }
+                switch (prop.propertyType)
+                {
+                    case SerializedPropertyType.Integer:
+                        return (T)System.Convert.ChangeType(prop.intValue, typeof(T));
+                    case SerializedPropertyType.Boolean:
+                        return (T)System.Convert.ChangeType(prop.boolValue, typeof(T));
+                    case SerializedPropertyType.Float:
+                        return (T)System.Convert.ChangeType(prop.floatValue, typeof(T));
+                    case SerializedPropertyType.String:
+                        return (T)System.Convert.ChangeType(prop.stringValue, typeof(T));
+                    case SerializedPropertyType.Color:
+                        return (T)System.Convert.ChangeType(prop.colorValue, typeof(T));
+                    case SerializedPropertyType.Enum:
+                        return (T)System.Convert.ChangeType(prop.enumValueIndex, typeof(T));
+                    case SerializedPropertyType.Vector2:
+                        return (T)System.Convert.ChangeType(prop.vector2Value, typeof(T));
+                    case SerializedPropertyType.Vector3:
+                        return (T)System.Convert.ChangeType(prop.vector3Value, typeof(T));
+                    case SerializedPropertyType.Vector4:
+                        return (T)System.Convert.ChangeType(prop.vector4Value, typeof(T));
+                    case SerializedPropertyType.Rect:
+                        return (T)System.Convert.ChangeType(prop.rectValue, typeof(T));
+                    case SerializedPropertyType.Character:
+                        return (T)System.Convert.ChangeType(prop.intValue, typeof(T));
+                    case SerializedPropertyType.AnimationCurve:
+                        return (T)System.Convert.ChangeType(prop.animationCurveValue, typeof(T));
+                    case SerializedPropertyType.Bounds:
+                        return (T)System.Convert.ChangeType(prop.boundsValue, typeof(T));
+                    case SerializedPropertyType.Quaternion:
+                        return (T)System.Convert.ChangeType(prop.quaternionValue, typeof(T));
+                    case SerializedPropertyType.ExposedReference:
+                        return (T)System.Convert.ChangeType(prop.exposedReferenceValue, typeof(T));
+                    case SerializedPropertyType.FixedBufferSize:
+                        return (T)System.Convert.ChangeType(prop.fixedBufferSize, typeof(T));
+                    case SerializedPropertyType.Vector2Int:
+                        return (T)System.Convert.ChangeType(prop.vector2IntValue, typeof(T));
+                    case SerializedPropertyType.Vector3Int:
+                        return (T)System.Convert.ChangeType(prop.vector3IntValue, typeof(T));
+                    case SerializedPropertyType.RectInt:
+                        return (T)System.Convert.ChangeType(prop.rectIntValue, typeof(T));
+                    case SerializedPropertyType.BoundsInt:
+                        return (T)System.Convert.ChangeType(prop.boundsIntValue, typeof(T));
+                    default:
+                        break;
+                }
+            }
+            return default(T);
+        }
+        public static T GetSerializedUnityObject<T>(UnityEngine.Object unityObject, string propertyName) where T : class
+        {
+            var serializedObject = new SerializedObject(unityObject);
+            return GetSerializedUnityObject<T>(serializedObject, propertyName);
+        }
+        public static T GetSerializedUnityObject<T>(SerializedObject serializedObject, string propertyName) where T : class
         {
             var prop = serializedObject.FindProperty(propertyName);
             if (prop != null)
@@ -391,12 +454,104 @@ namespace UdonLab.EditorUI
             }
             return list.ToArray();
         }
-        public static List<T> GetSerializedObjectList<T>(UnityEngine.Object unityObject, string propertyName, bool allowNull = false) where T : class
+        public static List<T> GetSerializedObjectList<T>(UnityEngine.Object unityObject, string propertyName, bool allowNull = false) where T : IConvertible
         {
             var serializedObject = new SerializedObject(unityObject);
             return GetSerializedObjectList<T>(serializedObject, propertyName, allowNull);
         }
-        public static List<T> GetSerializedObjectList<T>(SerializedObject serializedObject, string propertyName, bool allowNull = false) where T : class
+        public static List<T> GetSerializedObjectList<T>(SerializedObject serializedObject, string propertyName, bool allowNull = false) where T : IConvertible
+        {
+            var prop = serializedObject.FindProperty(propertyName);
+            var list = new List<T>();
+            if (prop != null)
+            {
+                for (int i = 0; i < prop.arraySize; i++)
+                {
+                    var element = prop.GetArrayElementAtIndex(i);
+                    if (element != null)
+                    {
+                        T value = default(T);
+                        if (element.propertyType == SerializedPropertyType.ObjectReference)
+                        {
+                            value = (T)Convert.ChangeType(element.objectReferenceValue, typeof(T));
+                        }
+                        else switch (element.propertyType)
+                            {
+                                case SerializedPropertyType.Integer:
+                                    value = (T)Convert.ChangeType(element.intValue, typeof(T));
+                                    break;
+                                case SerializedPropertyType.Boolean:
+                                    value = (T)Convert.ChangeType(element.boolValue, typeof(T));
+                                    break;
+                                case SerializedPropertyType.Float:
+                                    value = (T)Convert.ChangeType(element.floatValue, typeof(T));
+                                    break;
+                                case SerializedPropertyType.String:
+                                    value = (T)Convert.ChangeType(element.stringValue, typeof(T));
+                                    break;
+                                case SerializedPropertyType.Color:
+                                    value = (T)Convert.ChangeType(element.colorValue, typeof(T));
+                                    break;
+                                case SerializedPropertyType.Enum:
+                                    value = (T)Convert.ChangeType(element.enumValueIndex, typeof(T));
+                                    break;
+                                case SerializedPropertyType.Vector2:
+                                    value = (T)Convert.ChangeType(element.vector2Value, typeof(T));
+                                    break;
+                                case SerializedPropertyType.Vector3:
+                                    value = (T)Convert.ChangeType(element.vector3Value, typeof(T));
+                                    break;
+                                case SerializedPropertyType.Vector4:
+                                    value = (T)Convert.ChangeType(element.vector4Value, typeof(T));
+                                    break;
+                                case SerializedPropertyType.Rect:
+                                    value = (T)Convert.ChangeType(element.rectValue, typeof(T));
+                                    break;
+                                case SerializedPropertyType.Character:
+                                    value = (T)Convert.ChangeType(element.intValue, typeof(T));
+                                    break;
+                                case SerializedPropertyType.AnimationCurve:
+                                    value = (T)Convert.ChangeType(element.animationCurveValue, typeof(T));
+                                    break;
+                                case SerializedPropertyType.Bounds:
+                                    value = (T)Convert.ChangeType(element.boundsValue, typeof(T));
+                                    break;
+                                case SerializedPropertyType.Quaternion:
+                                    value = (T)Convert.ChangeType(element.quaternionValue, typeof(T));
+                                    break;
+                                case SerializedPropertyType.ExposedReference:
+                                    value = (T)Convert.ChangeType(element.exposedReferenceValue, typeof(T));
+                                    break;
+                                case SerializedPropertyType.Vector2Int:
+                                    value = (T)Convert.ChangeType(element.vector2IntValue, typeof(T));
+                                    break;
+                                case SerializedPropertyType.Vector3Int:
+                                    value = (T)Convert.ChangeType(element.vector3IntValue, typeof(T));
+                                    break;
+                                case SerializedPropertyType.RectInt:
+                                    value = (T)Convert.ChangeType(element.rectIntValue, typeof(T));
+                                    break;
+                                case SerializedPropertyType.BoundsInt:
+                                    value = (T)Convert.ChangeType(element.boundsIntValue, typeof(T));
+                                    break;
+                                default:
+                                    break;
+                            }
+                        if (value != null || allowNull)
+                        {
+                            list.Add(value);
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+        public static List<T> GetSerializedUnityObjectList<T>(UnityEngine.Object unityObject, string propertyName, bool allowNull = false) where T : class
+        {
+            var serializedObject = new SerializedObject(unityObject);
+            return GetSerializedUnityObjectList<T>(serializedObject, propertyName, allowNull);
+        }
+        public static List<T> GetSerializedUnityObjectList<T>(SerializedObject serializedObject, string propertyName, bool allowNull = false) where T : class
         {
             var prop = serializedObject.FindProperty(propertyName);
             var list = new List<T>();
