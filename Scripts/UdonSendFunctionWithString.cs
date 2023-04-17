@@ -7,7 +7,7 @@ using VRC.Udon;
 
 namespace UdonLab.Toolkit
 {
-    public class UdonInteractFunctionWithInt : UdonSharpBehaviour
+    public class UdonSendFunctionWithString : UdonSharpBehaviour
     {
         /// <summary>
         /// 需要调用的UdonBehaviour
@@ -15,9 +15,9 @@ namespace UdonLab.Toolkit
         [Header("需要调用的UdonBehaviour")]
         [SerializeField] public UdonBehaviour[] udonBehaviours;
         /// <summary>
-        /// 互动后将调用以下的函数
+        /// 触发后将调用以下的函数
         /// </summary>
-        [Header("进入后将调用以下的函数")]
+        [Header("触发后将调用以下的函数")]
         [SerializeField] public string[] functionNames;
         /// <summary>
         /// 需要调整参数的变量名
@@ -28,12 +28,12 @@ namespace UdonLab.Toolkit
         /// 需要调整参数的值
         /// </summary>
         [Header("需要调整参数的值")]
-        [SerializeField] public int[] values;
+        [SerializeField] public string[] values;
         /// <summary>
         /// 只允许本地玩家触发
         /// </summary>
-        [Header("只允许本地玩家触发")]
-        [SerializeField] private bool isLocalOnly = true;
+        // [Header("只允许本地玩家触发")]
+        // [SerializeField] private bool isLocalOnly = true;
         /// <summary>
         /// 只允许触发一次
         /// </summary>
@@ -42,10 +42,10 @@ namespace UdonLab.Toolkit
         /// <summary>
         /// 是否已触发
         /// </summary>
-        [NonSerialized] private bool _isInteracted = false;
-        public void Interact_()
+        [NonSerialized] private bool _isSended = false;
+        public void SendFunctions()
         {
-            if (isOnce && _isInteracted)
+            if (isOnce && _isSended)
                 return;
             for (int i = 0; i < udonBehaviours.Length; i++)
             {
@@ -61,18 +61,7 @@ namespace UdonLab.Toolkit
                 }
                 udonBehaviours[i].SendCustomEvent(functionNames[i]);
             }
-            _isInteracted = true;
-        }
-        public override void Interact()
-        {
-            if (isLocalOnly)
-            {
-                Interact_();
-            }
-            else
-            {
-                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Interact_");
-            }
+            _isSended = true;
         }
     }
 }

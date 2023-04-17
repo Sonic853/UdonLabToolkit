@@ -7,7 +7,7 @@ using VRC.Udon;
 
 namespace UdonLab.Toolkit
 {
-    public class UdonInteractFunctionWithInt : UdonSharpBehaviour
+    public class UdonInteractFunctionWithString : UdonSharpBehaviour
     {
         /// <summary>
         /// 需要调用的UdonBehaviour
@@ -28,7 +28,7 @@ namespace UdonLab.Toolkit
         /// 需要调整参数的值
         /// </summary>
         [Header("需要调整参数的值")]
-        [SerializeField] public int[] values;
+        [SerializeField] public string[] values;
         /// <summary>
         /// 只允许本地玩家触发
         /// </summary>
