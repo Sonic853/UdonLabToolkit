@@ -7,28 +7,18 @@ using VRC.Udon;
 
 namespace UdonLab.Toolkit
 {
-    public class UdonTriggerFunctions : UdonSharpBehaviour
+    public class UdonTriggerSender : UdonSharpBehaviour
     {
         /// <summary>
-        /// 进入后需要调用的UdonBehaviour
+        /// 进入后需要调用的 Udon Send Functions
         /// </summary>
-        [Header("进入后需要调用的UdonBehaviour")]
-        [SerializeField] private UdonBehaviour[] udonBehavioursEnter;
+        [Header("进入后需要调用的 Udon Send")]
+        [SerializeField] private UdonBehaviour[] udonSenderEnter;
         /// <summary>
-        /// 进入后将调用以下的函数
+        /// 退出后需要调用的 Udon Send Functions
         /// </summary>
-        [Header("进入后将调用以下的函数")]
-        [SerializeField] private string[] enterFunctionNames;
-        /// <summary>
-        /// 退出后需要调用的UdonBehaviour
-        /// </summary>
-        [Header("退出后需要调用的UdonBehaviour")]
-        [SerializeField] private UdonBehaviour[] udonBehavioursExit;
-        /// <summary>
-        /// 退出后将调用以下的函数
-        /// </summary>
-        [Header("退出后将调用以下的函数")]
-        [SerializeField] private string[] exitFunctionNames;
+        [Header("退出后需要调用的 Udon Send")]
+        [SerializeField] private UdonBehaviour[] udonSenderExit;
         /// <summary>
         /// 只允许本地玩家触发
         /// </summary>
@@ -39,7 +29,14 @@ namespace UdonLab.Toolkit
         /// </summary>
         [Header("只允许触发一次：0：禁用 1：进入 2：退出 3：都只允许触发一次")]
         [Range(0, 3)]
-        [SerializeField] private int isOnce = 3;
+        [SerializeField] private int isOnce = 0;
+        /// <summary>
+        /// 放入玩家名字：0：禁用 1：进入 2：退出 3：都放入玩家名字（UdonSendFunctionWithString Only）
+        /// </summary>
+        [Header("放入玩家名字：0：禁用 1：进入 2：退出 3：都放入玩家名字")]
+        [Tooltip("（UdonSendFunctionWithString Only）")]
+        [Range(0, 3)]
+        [SerializeField] private int sendPlayerName = 0;
         /// <summary>
         /// 是否已触发
         /// </summary>
@@ -53,48 +50,54 @@ namespace UdonLab.Toolkit
         /// </summary>
         [Header("触发器启用：0：都启用 1：进入 2：退出")]
         [Range(0, 2)]
-        [SerializeField] private int triggerType = 2;
+        [SerializeField] private int triggerType = 0;
         [NonSerialized] private VRCPlayerApi OnPlayerTriggerEnter_VRCPlayerApi_ = null;
         [NonSerialized] private VRCPlayerApi OnPlayerTriggerExit_VRCPlayerApi_ = null;
         public void OnPlayerTriggerEnter_()
         {
-            // if (isOnce && _isEntered
             if (isOnce == 1 && _isEntered
             || isOnce == 3 && _isEntered
             || OnPlayerTriggerEnter_VRCPlayerApi_ == null
             || isLocalOnly && !OnPlayerTriggerEnter_VRCPlayerApi_.isLocal)
                 return;
-            foreach (var udonBehaviour in udonBehavioursEnter)
+            for (int i = 0; i < udonSenderEnter.Length; i++)
             {
-                if (udonBehaviour == null)
+                if (udonSenderEnter[i] == null)
                     continue;
-                foreach (var functionName in enterFunctionNames)
+                if (sendPlayerName == 1 || sendPlayerName == 3)
                 {
-                    if (string.IsNullOrEmpty(functionName))
-                        continue;
-                    udonBehaviour.SendCustomEvent(functionName);
+                    var udonSenderValues = (string[])udonSenderEnter[i].GetProgramVariable("values");
+                    if (udonSenderValues != null) for (int j = 0; j < udonSenderValues.Length; j++)
+                        {
+                            udonSenderValues[j] = OnPlayerTriggerEnter_VRCPlayerApi_.displayName;
+                        }
+                    udonSenderEnter[i].SetProgramVariable("values", udonSenderValues);
                 }
+                udonSenderEnter[i].SendCustomEvent("SendFunctions");
             }
             _isEntered = true;
         }
         public void OnPlayerTriggerExit_()
         {
-            // if (isOnce && _isExited
             if (isOnce == 2 && _isExited
             || isOnce == 3 && _isExited
             || OnPlayerTriggerExit_VRCPlayerApi_ == null
             || isLocalOnly && !OnPlayerTriggerExit_VRCPlayerApi_.isLocal)
                 return;
-            foreach (var udonBehaviour in udonBehavioursExit)
+            for (int i = 0; i < udonSenderExit.Length; i++)
             {
-                if (udonBehaviour == null)
+                if (udonSenderExit[i] == null)
                     continue;
-                foreach (var functionName in exitFunctionNames)
+                if (sendPlayerName == 2 || sendPlayerName == 3)
                 {
-                    if (string.IsNullOrEmpty(functionName))
-                        continue;
-                    udonBehaviour.SendCustomEvent(functionName);
+                    var udonSenderValues = (string[])udonSenderExit[i].GetProgramVariable("values");
+                    if (udonSenderValues != null) for (int j = 0; j < udonSenderValues.Length; j++)
+                        {
+                            udonSenderValues[j] = OnPlayerTriggerExit_VRCPlayerApi_.displayName;
+                        }
+                    udonSenderExit[i].SetProgramVariable("values", udonSenderValues);
                 }
+                udonSenderExit[i].SendCustomEvent("SendFunctions");
             }
             _isExited = true;
         }
