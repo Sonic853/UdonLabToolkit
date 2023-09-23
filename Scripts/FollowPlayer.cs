@@ -14,6 +14,11 @@ namespace UdonLab.Toolkit
         /// </summary>
         [Header("最长距离，超过这个距离将拉至这个距离")]
         [SerializeField] private float _maxDistance = 1;
+        /// <summary>
+        /// 改变速度
+        /// </summary>
+        [Header("改变速度")]
+        [SerializeField] private float _speed = 10;
         void LateUpdate()
         {
             if (_player == null)
@@ -33,9 +38,9 @@ namespace UdonLab.Toolkit
                     transform.position = Vector3.MoveTowards(transform.position, playerPosition, distance - _maxDistance);
                 }
             }
-            transform.position = Vector3.Lerp(transform.position, playerPosition, Time.deltaTime * 10);
+            transform.position = Vector3.Lerp(transform.position, playerPosition, Time.deltaTime * _speed);
             // 只改变 Y 轴 Lerp
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, _player.GetRotation().eulerAngles.y, 0), Time.deltaTime * 10);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, _player.GetRotation().eulerAngles.y, 0), Time.deltaTime * _speed);
         }
     }
 }

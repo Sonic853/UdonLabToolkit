@@ -61,11 +61,11 @@ namespace UdonLab.Toolkit
             if (_udonSharpBehaviour != null
              && _udonSharpBehaviour.GetUdonTypeName() == "UdonLab.Toolkit.UdonSendFunctionWithString")
             {
-                var _udonInteractFunctionWithInt = (UdonLab.Toolkit.UdonSendFunctionWithString)_udonSharpBehaviour;
-                _udonInteractFunctionWithInt.udonBehaviours = udonBehaviours;
-                _udonInteractFunctionWithInt.functionNames = functionNames;
-                _udonInteractFunctionWithInt.valueNames = valueNames;
-                _udonInteractFunctionWithInt.values = values;
+                var _udonInteractFunctionWithString = (UdonLab.Toolkit.UdonSendFunctionWithString)_udonSharpBehaviour;
+                _udonInteractFunctionWithString.udonBehaviours = udonBehaviours;
+                _udonInteractFunctionWithString.functionNames = functionNames;
+                _udonInteractFunctionWithString.valueNames = valueNames;
+                _udonInteractFunctionWithString.values = values;
             }
         }
         void RemovePlayer(string displayName)

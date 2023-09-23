@@ -58,3 +58,17 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+Scripts/SerializedProgram/
+Scripts/SerializedProgram.meta
+Scripts/DisassembleProgram/
+Scripts/DisassembleProgram.meta
+Scripts/DisassembleUdonBehaviour/
+Scripts/DisassembleUdonBehaviour.meta
+Scripts/SerializedUdonBehaviour/
+Scripts/SerializedUdonBehaviour.meta
+Scripts/NoPublic/
+Scripts/NoPublic.meta
+Test/
+Test.meta
+Private/
+Private.meta

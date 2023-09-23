@@ -144,33 +144,43 @@ namespace UdonLab.QuickUIElement
             switch (typeof(T).Name)
             {
                 case "Int32":
-                    var intField = new IntegerField(name);
-                    intField.value = Convert.ToInt32(value);
-                    intField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    var intField = new IntegerField(name)
+                    {
+                        value = Convert.ToInt32(value)
+                    };
+                    intField.RegisterCallback(onChange);
                     cehk.propertyField = intField;
                     break;
                 case "Single":
-                    var floatField = new FloatField(name);
-                    floatField.value = Convert.ToSingle(value);
-                    floatField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    var floatField = new FloatField(name)
+                    {
+                        value = Convert.ToSingle(value)
+                    };
+                    floatField.RegisterCallback(onChange);
                     cehk.propertyField = floatField;
                     break;
                 case "Int64":
-                    var longField = new LongField(name);
-                    longField.value = Convert.ToInt64(value);
-                    longField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    var longField = new LongField(name)
+                    {
+                        value = Convert.ToInt64(value)
+                    };
+                    longField.RegisterCallback(onChange);
                     cehk.propertyField = longField;
                     break;
                 case "Boolean":
-                    var toggle = new Toggle(name);
-                    toggle.value = Convert.ToBoolean(value);
-                    toggle.RegisterCallback<ChangeEvent<T>>(onChange);
+                    var toggle = new Toggle(name)
+                    {
+                        value = Convert.ToBoolean(value)
+                    };
+                    toggle.RegisterCallback(onChange);
                     cehk.propertyField = toggle;
                     break;
                 case "String":
-                    var textField = new TextField(name);
-                    textField.value = Convert.ToString(value);
-                    textField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    var textField = new TextField(name)
+                    {
+                        value = Convert.ToString(value)
+                    };
+                    textField.RegisterCallback(onChange);
                     cehk.propertyField = textField;
                     break;
                 default:
