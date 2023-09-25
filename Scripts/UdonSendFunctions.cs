@@ -13,27 +13,27 @@ namespace UdonLab.Toolkit
         /// 需要调用的UdonBehaviour
         /// </summary>
         [Header("需要调用的UdonBehaviour")]
-        [SerializeField] private UdonBehaviour[] udonBehaviours;
+        public UdonBehaviour[] udonBehaviours;
         /// <summary>
         /// 触发后将调用以下的函数
         /// </summary>
         [Header("触发后将调用以下的函数")]
-        [SerializeField] private string[] functionNames;
-        /// <summary>
-        /// 只允许本地玩家触发
-        /// </summary>
+        public string[] functionNames;
+        // /// <summary>
+        // /// 只允许本地玩家触发
+        // /// </summary>
         // [Header("只允许本地玩家触发")]
         // [SerializeField] private bool isLocalOnly = true;
         /// <summary>
         /// 只允许触发一次
         /// </summary>
         [Header("只允许触发一次")]
-        [SerializeField] private bool isOnce = false;
+        public bool isOnce = false;
         /// <summary>
         /// 是否已触发
         /// </summary>
-        [NonSerialized] private bool _isSended = false;
-        public void SendFunctions()
+        [NonSerialized] public bool _isSended = false;
+        public virtual void SendFunctions()
         {
             if (isOnce && _isSended)
                 return;

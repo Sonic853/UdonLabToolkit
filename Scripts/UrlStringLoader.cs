@@ -2,25 +2,23 @@
 using System;
 using UdonSharp;
 using UnityEngine;
-using VRC.SDK3.Image;
+using VRC.SDK3.StringLoading;
 using VRC.SDKBase;
 using VRC.Udon;
 
 namespace UdonLab.Toolkit
 {
-    public class UrlImageLoader : UdonSharpBehaviour
+    public class UrlStringLoader : UdonSharpBehaviour
     {
         public VRCUrl url;
-        public Texture2D content;
+        public string content;
         public bool loadOnStart = true;
         [NonSerialized] public bool isLoaded = false;
         public UdonBehaviour udonSendFunction;
         public string sendCustomEvent = "SendFunctions";
         public string setVariableName = "content";
-        VRCImageDownloader _imageDownloader;
         void Start()
         {
-            _imageDownloader = new VRCImageDownloader();
             if (loadOnStart)
             {
                 LoadUrl();
@@ -31,19 +29,19 @@ namespace UdonLab.Toolkit
             if (string.IsNullOrEmpty(url.ToString()))
                 return;
             isLoaded = false;
-            _imageDownloader.DownloadImage(url, null, GetComponent<UdonBehaviour>(), null);
+            VRCStringDownloader.LoadUrl(url, GetComponent<UdonBehaviour>());
         }
-        public override void OnImageLoadSuccess(IVRCImageDownload result)
+        public override void OnStringLoadSuccess(IVRCStringDownload result)
         {
             isLoaded = true;
             content = result.Result;
-            if (!string.IsNullOrEmpty(setVariableName))
+            if (!string.IsNullOrWhiteSpace(setVariableName))
                 udonSendFunction.SetProgramVariable(setVariableName, content);
             udonSendFunction.SendCustomEvent(sendCustomEvent);
         }
-        public override void OnImageLoadError(IVRCImageDownload result)
+        public override void OnStringLoadError(IVRCStringDownload result)
         {
-            Debug.LogError($"UdonLab.Toolkit.UrlImageLoader: Could not load {result.Url} : {result.ErrorMessage} ");
+            Debug.LogError($"UdonLab.Toolkit.UrlStringLoader: Could not load {result.Url} : {result.Error} ");
         }
     }
 }

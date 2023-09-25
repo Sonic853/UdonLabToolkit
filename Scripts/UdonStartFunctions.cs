@@ -42,6 +42,7 @@ namespace UdonLab.Toolkit
                     continue;
                 udonBehaviours[i].SendCustomEvent(functionNames[i]);
             }
+            _isInteracted = true;
         }
     }
 }
