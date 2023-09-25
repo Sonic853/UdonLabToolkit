@@ -1,6 +1,11 @@
 .CustomEditor{
     padding-left: 15px;
 }
+#UdonSharpGUI{
+    padding-bottom: 4px;
+    border-bottom-width: 2px;
+    border-bottom-color: #808080;
+}
 .head {
     margin-top: 3px;
     margin-bottom: 3px;
