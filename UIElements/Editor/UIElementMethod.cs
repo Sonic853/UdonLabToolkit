@@ -36,11 +36,13 @@ namespace UdonLab.QuickUIElement
         {
             if (target == null) return null;
             var serializedObject = new SerializedObject(target);
-            var pfk = new PropertyFieldKit();
-            pfk.propertyField = new PropertyField(serializedObject.FindProperty(bindingPath))
+            var pfk = new PropertyFieldKit
             {
-                name = bindingPath,
-                label = label,
+                propertyField = new PropertyField(serializedObject.FindProperty(bindingPath))
+                {
+                    name = bindingPath,
+                    label = label,
+                }
             };
             pfk.propertyField.Bind(serializedObject);
             var field = target.GetType().GetField(bindingPath, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
@@ -58,11 +60,13 @@ namespace UdonLab.QuickUIElement
         {
             if (target == null) return null;
             var serializedObject = new SerializedObject(target);
-            var ofk = new ObjectFieldKit();
-            ofk.propertyField = new ObjectField()
+            var ofk = new ObjectFieldKit
             {
-                name = bindingPath,
-                label = label,
+                propertyField = new ObjectField()
+                {
+                    name = bindingPath,
+                    label = label,
+                }
             };
             var field = target.GetType().GetField(bindingPath, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
             var property = target.GetType().GetProperty(bindingPath, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
@@ -74,7 +78,7 @@ namespace UdonLab.QuickUIElement
                 var headerAttribute = Attribute.GetCustomAttribute(field, typeof(HeaderAttribute)) as HeaderAttribute
                 ?? Attribute.GetCustomAttribute(property, typeof(HeaderAttribute)) as HeaderAttribute
                 ?? null;
-                if (headerAttribute != null) ofk.label = CreateTitle(headerAttribute.header);
+                if (headerAttribute != null) ofk.label = CreateTitle(forceOverrideLabel ? label : headerAttribute.header);
             }
             ofk.propertyField.value = serializedObject.FindProperty(bindingPath).objectReferenceValue;
             // ofk.propertyField.BindProperty(serializedObject.FindProperty(bindingPath));
@@ -102,13 +106,13 @@ namespace UdonLab.QuickUIElement
                 {
                     if (field.FieldType.IsSubclassOf(typeof(UnityEngine.Object)))
                     {
-                        var ofk = CreateObjectField(target, bindingPath, label);
+                        var ofk = CreateObjectField(target, bindingPath, label, forceOverrideLabel);
                         cehk.label = ofk.label;
                         cehk.propertyField = ofk.propertyField;
                     }
                     else
                     {
-                        var pfk = CreatePropertyField(target, bindingPath, label);
+                        var pfk = CreatePropertyField(target, bindingPath, label, forceOverrideLabel);
                         cehk.label = pfk.label;
                         cehk.propertyField = pfk.propertyField;
                     }
@@ -117,13 +121,13 @@ namespace UdonLab.QuickUIElement
                 {
                     if (property.PropertyType.IsSubclassOf(typeof(UnityEngine.Object)))
                     {
-                        var ofk = CreateObjectField(target, bindingPath, label);
+                        var ofk = CreateObjectField(target, bindingPath, label, forceOverrideLabel);
                         cehk.label = ofk.label;
                         cehk.propertyField = ofk.propertyField;
                     }
                     else
                     {
-                        var pfk = CreatePropertyField(target, bindingPath, label);
+                        var pfk = CreatePropertyField(target, bindingPath, label, forceOverrideLabel);
                         cehk.label = pfk.label;
                         cehk.propertyField = pfk.propertyField;
                     }
@@ -131,7 +135,7 @@ namespace UdonLab.QuickUIElement
             }
             else
             {
-                var pfk = CreatePropertyField(target, bindingPath, label);
+                var pfk = CreatePropertyField(target, bindingPath, label, forceOverrideLabel);
                 cehk.label = pfk.label;
                 cehk.propertyField = pfk.propertyField;
             }
@@ -195,82 +199,108 @@ namespace UdonLab.QuickUIElement
             switch (typeof(T).Name)
             {
                 case "Color":
-                    var colorField = new ColorField(name);
-                    colorField.value = (Color)(object)value;
-                    colorField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    var colorField = new ColorField(name)
+                    {
+                        value = (Color)(object)value
+                    };
+                    colorField.RegisterCallback(onChange);
                     cehk.propertyField = colorField;
                     break;
                 case "Vector2":
-                    var vector2Field = new Vector2Field(name);
-                    vector2Field.value = (Vector2)(object)value;
-                    vector2Field.RegisterCallback<ChangeEvent<T>>(onChange);
+                    var vector2Field = new Vector2Field(name)
+                    {
+                        value = (Vector2)(object)value
+                    };
+                    vector2Field.RegisterCallback(onChange);
                     cehk.propertyField = vector2Field;
                     break;
                 case "Vector3":
-                    var vector3Field = new Vector3Field(name);
-                    vector3Field.value = (Vector3)(object)value;
-                    vector3Field.RegisterCallback<ChangeEvent<T>>(onChange);
+                    var vector3Field = new Vector3Field(name)
+                    {
+                        value = (Vector3)(object)value
+                    };
+                    vector3Field.RegisterCallback(onChange);
                     cehk.propertyField = vector3Field;
                     break;
                 case "Vector4":
-                    var vector4Field = new Vector4Field(name);
-                    vector4Field.value = (Vector4)(object)value;
-                    vector4Field.RegisterCallback<ChangeEvent<T>>(onChange);
+                    var vector4Field = new Vector4Field(name)
+                    {
+                        value = (Vector4)(object)value
+                    };
+                    vector4Field.RegisterCallback(onChange);
                     cehk.propertyField = vector4Field;
                     break;
                 case "Rect":
-                    var rectField = new RectField(name);
-                    rectField.value = (Rect)(object)value;
-                    rectField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    var rectField = new RectField(name)
+                    {
+                        value = (Rect)(object)value
+                    };
+                    rectField.RegisterCallback(onChange);
                     cehk.propertyField = rectField;
                     break;
                 case "Bounds":
-                    var boundsField = new BoundsField(name);
-                    boundsField.value = (Bounds)(object)value;
-                    boundsField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    var boundsField = new BoundsField(name)
+                    {
+                        value = (Bounds)(object)value
+                    };
+                    boundsField.RegisterCallback(onChange);
                     cehk.propertyField = boundsField;
                     break;
                 case "Vector2Int":
-                    var vector2IntField = new Vector2IntField(name);
-                    vector2IntField.value = (Vector2Int)(object)value;
-                    vector2IntField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    var vector2IntField = new Vector2IntField(name)
+                    {
+                        value = (Vector2Int)(object)value
+                    };
+                    vector2IntField.RegisterCallback(onChange);
                     cehk.propertyField = vector2IntField;
                     break;
                 case "Vector3Int":
-                    var vector3IntField = new Vector3IntField(name);
-                    vector3IntField.value = (Vector3Int)(object)value;
-                    vector3IntField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    var vector3IntField = new Vector3IntField(name)
+                    {
+                        value = (Vector3Int)(object)value
+                    };
+                    vector3IntField.RegisterCallback(onChange);
                     cehk.propertyField = vector3IntField;
                     break;
                 case "RectInt":
-                    var rectIntField = new RectIntField(name);
-                    rectIntField.value = (RectInt)(object)value;
-                    rectIntField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    var rectIntField = new RectIntField(name)
+                    {
+                        value = (RectInt)(object)value
+                    };
+                    rectIntField.RegisterCallback(onChange);
                     cehk.propertyField = rectIntField;
                     break;
                 case "BoundsInt":
-                    var boundsIntField = new BoundsIntField(name);
-                    boundsIntField.value = (BoundsInt)(object)value;
-                    boundsIntField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    var boundsIntField = new BoundsIntField(name)
+                    {
+                        value = (BoundsInt)(object)value
+                    };
+                    boundsIntField.RegisterCallback(onChange);
                     cehk.propertyField = boundsIntField;
                     break;
                 case "AnimationCurve":
-                    var animationCurveField = new CurveField(name);
-                    animationCurveField.value = (AnimationCurve)(object)value;
-                    animationCurveField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    var animationCurveField = new CurveField(name)
+                    {
+                        value = (AnimationCurve)(object)value
+                    };
+                    animationCurveField.RegisterCallback(onChange);
                     cehk.propertyField = animationCurveField;
                     break;
                 case "Gradient":
-                    var gradientField = new GradientField(name);
-                    gradientField.value = (Gradient)(object)value;
-                    gradientField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    var gradientField = new GradientField(name)
+                    {
+                        value = (Gradient)(object)value
+                    };
+                    gradientField.RegisterCallback(onChange);
                     cehk.propertyField = gradientField;
                     break;
                 default:
-                    var objectField = new ObjectField(name);
-                    objectField.value = value as UnityEngine.Object;
-                    objectField.objectType = typeof(T);
-                    objectField.RegisterCallback<ChangeEvent<T>>(onChange);
+                    var objectField = new ObjectField(name)
+                    {
+                        value = value as UnityEngine.Object,
+                        objectType = typeof(T)
+                    };
+                    objectField.RegisterCallback(onChange);
                     cehk.propertyField = objectField;
                     break;
             }
