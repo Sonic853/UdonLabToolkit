@@ -17,7 +17,7 @@ namespace UdonLab.Toolkit
         [SerializeField] private VideoCore videoCore;
         [SerializeField] private Slider _progressSlider;
         [SerializeField] private BaseVRCVideoPlayer bvvp;
-        [SerializeField] private UdonArrayPlus udonArrayPlus;
+        // [SerializeField] private UdonArrayPlus udonArrayPlus;
         [SerializeField] private GameObject content;
         [SerializeField] private GameObject prefab;
         [SerializeField] private Text status;
@@ -34,7 +34,7 @@ namespace UdonLab.Toolkit
         void Start()
         {
             if (Networking.LocalPlayer != null) localPlayer = Networking.LocalPlayer;
-            udonBehaviours = new UdonBehaviour[] { (UdonBehaviour)GetComponent(typeof(UdonBehaviour)) };
+            udonBehaviours = new UdonBehaviour[] { GetComponent<UdonBehaviour>() };
             if (videoCore != null) videoCore.AddListener(this);
             if (udonAnimatorController != null
             && udonAnimatorController.GetAnimator() != null
@@ -50,7 +50,7 @@ namespace UdonLab.Toolkit
                     InsertState(stateName);
                 }
             }
-            if (offsetui != null) offsetui.text = $"偏移：{offset.ToString()}s";
+            if (offsetui != null) offsetui.text = $"偏移：{offset}s";
             if (offsetif != null) offsetif.text = offset.ToString();
         }
         // void Update()
@@ -101,7 +101,7 @@ namespace UdonLab.Toolkit
                 return;
             if (!Networking.IsOwner(gameObject))
                 Networking.SetOwner(Networking.LocalPlayer, gameObject);
-            var _offsetPlayers = udonArrayPlus.stringsAdd2(offsetPlayers, JoinOffset_Name);
+            var _offsetPlayers = UdonArrayPlus.StringsAdd2(offsetPlayers, JoinOffset_Name);
             if (offsetPlayers.Length != _offsetPlayers.Length
             && videoCore.isPlaying && !videoCore.paused
             && bvvp != null)
@@ -123,7 +123,7 @@ namespace UdonLab.Toolkit
                 return;
             if (!Networking.IsOwner(gameObject))
                 Networking.SetOwner(Networking.LocalPlayer, gameObject);
-            var _offsetPlayers = udonArrayPlus.stringsRemove(offsetPlayers, LeaveOffset_Name);
+            var _offsetPlayers = UdonArrayPlus.StringsRemove(offsetPlayers, LeaveOffset_Name);
             if (offsetPlayers.Length != _offsetPlayers.Length
             && videoCore.isPlaying && !videoCore.paused
             && bvvp != null)
@@ -145,7 +145,7 @@ namespace UdonLab.Toolkit
             {
                 offset = _offset;
             }
-            if (offsetui != null) offsetui.text = $"偏移：{offset.ToString()}s";
+            if (offsetui != null) offsetui.text = $"偏移：{offset}s";
             offsetif.text = offset.ToString();
         }
         public void Pause()
@@ -188,7 +188,7 @@ namespace UdonLab.Toolkit
                 if (Networking.LocalPlayer != null) localPlayer = Networking.LocalPlayer;
                 else return;
             }
-            if (udonArrayPlus.stringsIndex(offsetPlayers, localPlayer.displayName) != -1
+            if (UdonArrayPlus.StringsIndex(offsetPlayers, localPlayer.displayName) != -1
             && bvvp != null)
             {
                 var nowtime = bvvp.GetTime();
@@ -227,9 +227,9 @@ namespace UdonLab.Toolkit
                 if (Networking.LocalPlayer != null) localPlayer = Networking.LocalPlayer;
                 else return;
             }
-            var isJoinOffset = udonArrayPlus.stringsIndex(offsetPlayers, localPlayer.displayName) != -1;
+            var isJoinOffset = UdonArrayPlus.StringsIndex(offsetPlayers, localPlayer.displayName) != -1;
             if (status != null)
-                status.text = $"动画：{PlayState_Name} 已加入偏移：{isJoinOffset.ToString()}";
+                status.text = $"动画：{PlayState_Name} 已加入偏移：{isJoinOffset}";
         }
         public void OnProgressChanged()
         {

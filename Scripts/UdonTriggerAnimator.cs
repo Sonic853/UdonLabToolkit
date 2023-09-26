@@ -10,11 +10,11 @@ namespace UdonLab.Toolkit
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class UdonTriggerAnimator : UdonSharpBehaviour
     {
-        /// <summary>
-        /// Udon Array Plus
-        /// </summary>
-        [Header("UdonArrayPlus")]
-        [SerializeField] private UdonArrayPlus udonArrayPlus;
+        // /// <summary>
+        // /// Udon Array Plus
+        // /// </summary>
+        // [Header("UdonArrayPlus")]
+        // [SerializeField] private UdonArrayPlus udonArrayPlus;
         /// <summary>
         /// 动画器
         /// </summary>
@@ -75,7 +75,7 @@ namespace UdonLab.Toolkit
             var player = OnPlayerTriggerEnter_VRCPlayerApi_;
             if (isLocalOnly && !player.isLocal)
                 return;
-            _playersName = udonArrayPlus.stringsAdd2(_playersName, player.displayName);
+            _playersName = UdonArrayPlus.StringsAdd2(_playersName, player.displayName);
             if (isLocalOnly)
             {
                 SetEnter();
@@ -102,7 +102,7 @@ namespace UdonLab.Toolkit
             var player = OnPlayerTriggerExit_VRCPlayerApi_;
             if (isLocalOnly && !player.isLocal)
                 return;
-            _playersName = udonArrayPlus.stringsRemove(_playersName, player.displayName);
+            _playersName = UdonArrayPlus.StringsRemove(_playersName, player.displayName);
             if (isLocalOnly)
             {
                 SetExit();
@@ -120,7 +120,7 @@ namespace UdonLab.Toolkit
         }
         public override void OnPlayerLeft(VRCPlayerApi player)
         {
-            _playersName = udonArrayPlus.stringsRemove(_playersName, player.displayName);
+            _playersName = UdonArrayPlus.StringsRemove(_playersName, player.displayName);
         }
         public override void OnDeserialization()
         {

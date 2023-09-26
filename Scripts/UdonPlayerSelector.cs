@@ -9,7 +9,7 @@ namespace UdonLab.Toolkit
 {
     public class UdonPlayerSelector : UdonSharpBehaviour
     {
-        [SerializeField] private UdonArrayPlus udonArrayPlus;
+        // [SerializeField] private UdonArrayPlus udonArrayPlus;
         VRCPlayerApi[] players = new VRCPlayerApi[0];
         [SerializeField] private GameObject content;
         [SerializeField] private GameObject prefab;
@@ -36,7 +36,7 @@ namespace UdonLab.Toolkit
         }
         void ResetList()
         {
-            var players = udonArrayPlus.Players();
+            var players = UdonArrayPlus.Players();
             // 清空 content
             for (int i = 0; i < content.transform.childCount; i++)
             {

@@ -11,7 +11,6 @@ namespace UdonLab.Toolkit
 {
     public class CheckModels : UdonSharpBehaviour
     {
-        [SerializeField]
         public Color[] colors =
         {
             Color.black,
@@ -110,8 +109,7 @@ namespace UdonLab.Toolkit
                 var result2 = targetPlayersl_.TryGetValue(key, out var model);
                 if (!result2) continue;
                 if (model == null) continue;
-                model.transform.position = key.GetBonePosition(HumanBodyBones.LeftHand);
-                model.transform.rotation = key.GetBoneRotation(HumanBodyBones.LeftHand);
+                model.transform.SetPositionAndRotation(key.GetBonePosition(HumanBodyBones.LeftHand), key.GetBoneRotation(HumanBodyBones.LeftHand));
                 result2 = targetPlayersr_.TryGetValue(key, out model);
                 if (!result2) continue;
                 if (model == null) continue;
@@ -149,8 +147,7 @@ namespace UdonLab.Toolkit
                 {
                     model.SetActive(true);
                     var instantiatedModelLeft = Instantiate(model);
-                    instantiatedModelLeft.transform.position = localPlayer.GetBonePosition(HumanBodyBones.LeftHand);
-                    instantiatedModelLeft.transform.rotation = localPlayer.GetBoneRotation(HumanBodyBones.LeftHand);
+                    instantiatedModelLeft.transform.SetPositionAndRotation(localPlayer.GetBonePosition(HumanBodyBones.LeftHand), localPlayer.GetBoneRotation(HumanBodyBones.LeftHand));
                     instantiatedModels_.Add(instantiatedModelLeft);
                     var penLight2l = (PenLight2)instantiatedModelLeft.GetComponentInChildren(typeof(UdonSharpBehaviour));
                     if (penLight2l != null) instantiatedPenLight2_.Add(penLight2l);
@@ -306,8 +303,7 @@ namespace UdonLab.Toolkit
                     {
                         model.SetActive(true);
                         var instantiatedModelLeft = Instantiate(model);
-                        instantiatedModelLeft.transform.position = player.GetBonePosition(HumanBodyBones.LeftHand);
-                        instantiatedModelLeft.transform.rotation = player.GetBoneRotation(HumanBodyBones.LeftHand);
+                        instantiatedModelLeft.transform.SetPositionAndRotation(player.GetBonePosition(HumanBodyBones.LeftHand), player.GetBoneRotation(HumanBodyBones.LeftHand));
                         instantiatedModels_.Add(instantiatedModelLeft);
                         var penLight2l = (PenLight2)instantiatedModelLeft.GetComponentInChildren(typeof(UdonSharpBehaviour));
                         if (penLight2l != null) instantiatedPenLight2_.Add(penLight2l);

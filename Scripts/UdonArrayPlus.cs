@@ -9,7 +9,7 @@ namespace UdonLab.Toolkit
     public class UdonArrayPlus : UdonSharpBehaviour
     {
         // String
-        public int stringsFind(string[] _array, string _value)
+        public static int StringsFind(string[] _array, string _value)
         {
             for (int i = 0; i < _array.Length; i++)
             {
@@ -18,19 +18,19 @@ namespace UdonLab.Toolkit
             }
             return -1;
         }
-        public int[] stringsFindAll(string[] _array, string _value)
+        public static int[] StringsFindAll(string[] _array, string _value)
         {
             int[] _index = new int[0];
             for (int i = 0; i < _array.Length; i++)
             {
                 if (_array[i] == _value)
                 {
-                    _index = intsAdd(_index, i);
+                    _index = IntsAdd(_index, i);
                 }
             }
             return _index;
         }
-        public int stringsIndex(string[] _array, string _value)
+        public static int StringsIndex(string[] _array, string _value)
         {
             for (int i = 0; i < _array.Length; i++)
             {
@@ -39,7 +39,7 @@ namespace UdonLab.Toolkit
             }
             return -1;
         }
-        public string[] stringsAdd(string[] _array, string _value)
+        public static string[] StringsAdd(string[] _array, string _value)
         {
             string[] _newArray = new string[_array.Length + 1];
             // for (int i = 0; i < _array.Length; i++)
@@ -50,19 +50,19 @@ namespace UdonLab.Toolkit
             _newArray[_array.Length] = _value;
             return _newArray;
         }
-        public string[] stringsAdd2(string[] _array, string _value)
+        public static string[] StringsAdd2(string[] _array, string _value)
         {
-            int index = stringsIndex(_array, _value);
+            int index = StringsIndex(_array, _value);
             if (index == -1)
             {
-                return stringsAdd(_array, _value);
+                return StringsAdd(_array, _value);
             }
             else
             {
                 return _array;
             }
         }
-        public string[] stringsRemoveIndex(string[] _array, int index)
+        public static string[] StringsRemoveIndex(string[] _array, int index)
         {
             if (index < 0 || index >= _array.Length)
             {
@@ -82,20 +82,20 @@ namespace UdonLab.Toolkit
                 return _newArray;
             }
         }
-        public string[] stringsRemove(string[] _array, string _value)
+        public static string[] StringsRemove(string[] _array, string _value)
         {
-            int index = stringsIndex(_array, _value);
+            int index = StringsIndex(_array, _value);
             if (index == -1)
             {
                 return _array;
             }
             else
             {
-                return stringsRemoveIndex(_array, index);
+                return StringsRemoveIndex(_array, index);
             }
         }
         // Int
-        public int intsFind(int[] _array, int _value)
+        public static int IntsFind(int[] _array, int _value)
         {
             for (int i = 0; i < _array.Length; i++)
             {
@@ -104,19 +104,19 @@ namespace UdonLab.Toolkit
             }
             return -1;
         }
-        public int[] intsFindAll(int[] _array, int _value)
+        public static int[] IntsFindAll(int[] _array, int _value)
         {
             int[] _index = new int[0];
             for (int i = 0; i < _array.Length; i++)
             {
                 if (_array[i] == _value)
                 {
-                    _index = intsAdd(_index, i);
+                    _index = IntsAdd(_index, i);
                 }
             }
             return _index;
         }
-        public int intsIndex(int[] _array, int _value)
+        public static int IntsIndex(int[] _array, int _value)
         {
             for (int i = 0; i < _array.Length; i++)
             {
@@ -125,7 +125,7 @@ namespace UdonLab.Toolkit
             }
             return -1;
         }
-        public int[] intsAdd(int[] _array, int _value)
+        public static int[] IntsAdd(int[] _array, int _value)
         {
             int[] _newArray = new int[_array.Length + 1];
             // for (int i = 0; i < _array.Length; i++)
@@ -136,19 +136,19 @@ namespace UdonLab.Toolkit
             _newArray[_array.Length] = _value;
             return _newArray;
         }
-        public int[] intsAdd2(int[] _array, int _value)
+        public static int[] IntsAdd2(int[] _array, int _value)
         {
-            int index = intsIndex(_array, _value);
+            int index = IntsIndex(_array, _value);
             if (index == -1)
             {
-                return intsAdd(_array, _value);
+                return IntsAdd(_array, _value);
             }
             else
             {
                 return _array;
             }
         }
-        public int[] intsRemoveIndex(int[] _array, int index)
+        public static int[] IntsRemoveIndex(int[] _array, int index)
         {
             if (index < 0 || index >= _array.Length)
             {
@@ -168,19 +168,19 @@ namespace UdonLab.Toolkit
                 return _newArray;
             }
         }
-        public int[] intsRemove(int[] _array, int _value)
+        public static int[] IntsRemove(int[] _array, int _value)
         {
-            int index = intsIndex(_array, _value);
+            int index = IntsIndex(_array, _value);
             if (index == -1)
             {
                 return _array;
             }
             else
             {
-                return intsRemoveIndex(_array, index);
+                return IntsRemoveIndex(_array, index);
             }
         }
-        public int[] intsSort(int[] _array, bool reverse)
+        public static int[] IntsSort(int[] _array, bool reverse)
         {
             int[] _newArray = new int[_array.Length];
             _array.CopyTo(_newArray, 0);
@@ -190,9 +190,7 @@ namespace UdonLab.Toolkit
                 {
                     if (_newArray[i] > _newArray[j])
                     {
-                        int temp = _newArray[i];
-                        _newArray[i] = _newArray[j];
-                        _newArray[j] = temp;
+                        (_newArray[j], _newArray[i]) = (_newArray[i], _newArray[j]);
                     }
                 }
             }
@@ -203,7 +201,7 @@ namespace UdonLab.Toolkit
             return _newArray;
         }
         // Float
-        public int floatsFind(float[] _array, float _value)
+        public static int FloatsFind(float[] _array, float _value)
         {
             for (int i = 0; i < _array.Length; i++)
             {
@@ -212,19 +210,19 @@ namespace UdonLab.Toolkit
             }
             return -1;
         }
-        public int[] floatsFindAll(float[] _array, float _value)
+        public static int[] FloatsFindAll(float[] _array, float _value)
         {
             int[] _index = new int[0];
             for (int i = 0; i < _array.Length; i++)
             {
                 if (_array[i] == _value)
                 {
-                    _index = intsAdd(_index, i);
+                    _index = IntsAdd(_index, i);
                 }
             }
             return _index;
         }
-        public int floatsIndex(float[] _array, float _value)
+        public static int FloatsIndex(float[] _array, float _value)
         {
             for (int i = 0; i < _array.Length; i++)
             {
@@ -233,7 +231,7 @@ namespace UdonLab.Toolkit
             }
             return -1;
         }
-        public float[] floatsAdd(float[] _array, float _value)
+        public static float[] FloatsAdd(float[] _array, float _value)
         {
             float[] _newArray = new float[_array.Length + 1];
             // for (int i = 0; i < _array.Length; i++)
@@ -244,19 +242,19 @@ namespace UdonLab.Toolkit
             _newArray[_array.Length] = _value;
             return _newArray;
         }
-        public float[] floatsAdd2(float[] _array, float _value)
+        public static float[] FloatsAdd2(float[] _array, float _value)
         {
-            int index = floatsIndex(_array, _value);
+            int index = FloatsIndex(_array, _value);
             if (index == -1)
             {
-                return floatsAdd(_array, _value);
+                return FloatsAdd(_array, _value);
             }
             else
             {
                 return _array;
             }
         }
-        public float[] floatsRemoveIndex(float[] _array, int index)
+        public static float[] FloatsRemoveIndex(float[] _array, int index)
         {
             if (index < 0 || index >= _array.Length)
             {
@@ -276,19 +274,19 @@ namespace UdonLab.Toolkit
                 return _newArray;
             }
         }
-        public float[] floatsRemove(float[] _array, float _value)
+        public static float[] FloatsRemove(float[] _array, float _value)
         {
-            int index = floatsIndex(_array, _value);
+            int index = FloatsIndex(_array, _value);
             if (index == -1)
             {
                 return _array;
             }
             else
             {
-                return floatsRemoveIndex(_array, index);
+                return FloatsRemoveIndex(_array, index);
             }
         }
-        public float[] floatsSort(float[] _array, bool reverse)
+        public static float[] FloatsSort(float[] _array, bool reverse)
         {
             float[] _newArray = new float[_array.Length];
             _array.CopyTo(_newArray, 0);
@@ -298,9 +296,7 @@ namespace UdonLab.Toolkit
                 {
                     if (_newArray[i] > _newArray[j])
                     {
-                        float temp = _newArray[i];
-                        _newArray[i] = _newArray[j];
-                        _newArray[j] = temp;
+                        (_newArray[j], _newArray[i]) = (_newArray[i], _newArray[j]);
                     }
                 }
             }
@@ -311,13 +307,13 @@ namespace UdonLab.Toolkit
             return _newArray;
         }
         // VRCPlayerApi
-        public VRCPlayerApi[] Players()
+        public static VRCPlayerApi[] Players()
         {
             VRCPlayerApi[] players = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];
             players = VRCPlayerApi.GetPlayers(players);
             return players;
         }
-        public VRCPlayerApi PlayersFindID(VRCPlayerApi[] players, int _id)
+        public static VRCPlayerApi PlayersFindID(VRCPlayerApi[] players, int _id)
         {
             for (int i = 0; i < players.Length; i++)
             {
@@ -326,7 +322,7 @@ namespace UdonLab.Toolkit
             }
             return null;
         }
-        public VRCPlayerApi PlayersFindName(VRCPlayerApi[] players, string _name)
+        public static VRCPlayerApi PlayersFindName(VRCPlayerApi[] players, string _name)
         {
             for (int i = 0; i < players.Length; i++)
             {
@@ -335,7 +331,7 @@ namespace UdonLab.Toolkit
             }
             return null;
         }
-        public int PlayersIndex(VRCPlayerApi[] players, VRCPlayerApi _player)
+        public static int PlayersIndex(VRCPlayerApi[] players, VRCPlayerApi _player)
         {
             for (int i = 0; i < players.Length; i++)
             {
@@ -344,7 +340,7 @@ namespace UdonLab.Toolkit
             }
             return -1;
         }
-        public int PlayersIndexID(VRCPlayerApi[] players, int _id)
+        public static int PlayersIndexID(VRCPlayerApi[] players, int _id)
         {
             for (int i = 0; i < players.Length; i++)
             {
@@ -353,7 +349,7 @@ namespace UdonLab.Toolkit
             }
             return -1;
         }
-        public int PlayersIndexName(VRCPlayerApi[] players, string _name)
+        public static int PlayersIndexName(VRCPlayerApi[] players, string _name)
         {
             for (int i = 0; i < players.Length; i++)
             {
@@ -362,7 +358,7 @@ namespace UdonLab.Toolkit
             }
             return -1;
         }
-        public VRCPlayerApi[] PlayersAdd(VRCPlayerApi[] players, VRCPlayerApi _player)
+        public static VRCPlayerApi[] PlayersAdd(VRCPlayerApi[] players, VRCPlayerApi _player)
         {
             int index = PlayersIndex(players, _player);
             if (index == -1)
@@ -381,7 +377,7 @@ namespace UdonLab.Toolkit
                 return players;
             }
         }
-        public VRCPlayerApi[] PlayersRemove(VRCPlayerApi[] players, VRCPlayerApi _player)
+        public static VRCPlayerApi[] PlayersRemove(VRCPlayerApi[] players, VRCPlayerApi _player)
         {
             int index = PlayersIndex(players, _player);
             if (index == -1)
@@ -402,23 +398,23 @@ namespace UdonLab.Toolkit
                 return newPlayers;
             }
         }
-        public VRCPlayerApi PlayersFindID(int _id)
+        public static VRCPlayerApi PlayersFindID(int _id)
         {
             VRCPlayerApi[] players = Players();
             return PlayersFindID(players, _id);
         }
-        public VRCPlayerApi PlayersFindName(string _name)
+        public static VRCPlayerApi PlayersFindName(string _name)
         {
             VRCPlayerApi[] players = Players();
             return PlayersFindName(players, _name);
         }
         // gameobject
-        public GameObject GameObjectsFindName(GameObject[] _array, string _name)
+        public static GameObject GameObjectsFindName(GameObject[] _array, string _name)
         {
             var index = GameObjectsIndexName(_array, _name);
             return index == -1 ? null : _array[index];
         }
-        public GameObject[] GameObjectsFindNameAll(GameObject[] _array, string _name)
+        public static GameObject[] GameObjectsFindNameAll(GameObject[] _array, string _name)
         {
             GameObject[] _newArray = new GameObject[0];
             for (int i = 0; i < _array.Length; i++)
@@ -430,7 +426,7 @@ namespace UdonLab.Toolkit
             }
             return _newArray;
         }
-        public int GameObjectsIndex(GameObject[] _array, GameObject _value)
+        public static int GameObjectsIndex(GameObject[] _array, GameObject _value)
         {
             for (int i = 0; i < _array.Length; i++)
             {
@@ -439,7 +435,7 @@ namespace UdonLab.Toolkit
             }
             return -1;
         }
-        public int GameObjectsIndexName(GameObject[] _array, string _name)
+        public static int GameObjectsIndexName(GameObject[] _array, string _name)
         {
             for (int i = 0; i < _array.Length; i++)
             {
@@ -448,19 +444,19 @@ namespace UdonLab.Toolkit
             }
             return -1;
         }
-        public int[] GameObjectsIndexNameAll(GameObject[] _array, string _name)
+        public static int[] GameObjectsIndexNameAll(GameObject[] _array, string _name)
         {
             int[] _newArray = new int[0];
             for (int i = 0; i < _array.Length; i++)
             {
                 if (_array[i].name == _name)
                 {
-                    _newArray = intsAdd(_newArray, i);
+                    _newArray = IntsAdd(_newArray, i);
                 }
             }
             return _newArray;
         }
-        public GameObject[] GameObjectsAdd(GameObject[] _array, GameObject _value)
+        public static GameObject[] GameObjectsAdd(GameObject[] _array, GameObject _value)
         {
             GameObject[] _newArray = new GameObject[_array.Length + 1];
             // for (int i = 0; i < _array.Length; i++)
@@ -471,7 +467,7 @@ namespace UdonLab.Toolkit
             _newArray[_array.Length] = _value;
             return _newArray;
         }
-        public GameObject[] GameObjectsAdd2(GameObject[] _array, GameObject _value)
+        public static GameObject[] GameObjectsAdd2(GameObject[] _array, GameObject _value)
         {
             int index = GameObjectsIndex(_array, _value);
             if (index == -1)
@@ -483,7 +479,7 @@ namespace UdonLab.Toolkit
                 return _array;
             }
         }
-        public GameObject[] GameObjectsRemoveIndex(GameObject[] _array, int index)
+        public static GameObject[] GameObjectsRemoveIndex(GameObject[] _array, int index)
         {
             if (index < 0 || index >= _array.Length)
             {
@@ -503,7 +499,7 @@ namespace UdonLab.Toolkit
                 return _newArray;
             }
         }
-        public GameObject[] GameObjectsRemove(GameObject[] _array, GameObject _value)
+        public static GameObject[] GameObjectsRemove(GameObject[] _array, GameObject _value)
         {
             int index = GameObjectsIndex(_array, _value);
             if (index == -1)
@@ -516,12 +512,12 @@ namespace UdonLab.Toolkit
             }
         }
         // UdonBehaviour
-        public UdonBehaviour UdonBehavioursFindName(UdonBehaviour[] _array, string _name)
+        public static UdonBehaviour UdonBehavioursFindName(UdonBehaviour[] _array, string _name)
         {
             var index = UdonBehavioursIndexName(_array, _name);
             return index == -1 ? null : _array[index];
         }
-        public UdonBehaviour[] UdonBehavioursFindNameAll(UdonBehaviour[] _array, string _name)
+        public static UdonBehaviour[] UdonBehavioursFindNameAll(UdonBehaviour[] _array, string _name)
         {
             UdonBehaviour[] _newArray = new UdonBehaviour[0];
             for (int i = 0; i < _array.Length; i++)
@@ -533,7 +529,7 @@ namespace UdonLab.Toolkit
             }
             return _newArray;
         }
-        public int UdonBehavioursIndex(UdonBehaviour[] _array, UdonBehaviour _value)
+        public static int UdonBehavioursIndex(UdonBehaviour[] _array, UdonBehaviour _value)
         {
             for (int i = 0; i < _array.Length; i++)
             {
@@ -542,31 +538,31 @@ namespace UdonLab.Toolkit
             }
             return -1;
         }
-        public int[] UdonBehavioursIndexProgramVariable(UdonBehaviour[] _array, string _name)
+        public static int[] UdonBehavioursIndexProgramVariable(UdonBehaviour[] _array, string _name)
         {
             int[] _newArray = new int[0];
             for (int i = 0; i < _array.Length; i++)
             {
                 if (_array[i].GetProgramVariable(_name) != null)
                 {
-                    _newArray = intsAdd(_newArray, i);
+                    _newArray = IntsAdd(_newArray, i);
                 }
             }
             return _newArray;
         }
-        public int[] UdonBehavioursIndexProgramVariableValue(UdonBehaviour[] _array, string _name, object _value)
+        public static int[] UdonBehavioursIndexProgramVariableValue(UdonBehaviour[] _array, string _name, object _value)
         {
             int[] _newArray = new int[0];
             for (int i = 0; i < _array.Length; i++)
             {
                 if (_array[i].GetProgramVariable(_name) == _value)
                 {
-                    _newArray = intsAdd(_newArray, i);
+                    _newArray = IntsAdd(_newArray, i);
                 }
             }
             return _newArray;
         }
-        public UdonBehaviour[] UdonBehavioursFindProgramVariable(UdonBehaviour[] _array, string _name)
+        public static UdonBehaviour[] UdonBehavioursFindProgramVariable(UdonBehaviour[] _array, string _name)
         {
             UdonBehaviour[] _newArray = new UdonBehaviour[0];
             for (int i = 0; i < _array.Length; i++)
@@ -578,7 +574,7 @@ namespace UdonLab.Toolkit
             }
             return _newArray;
         }
-        public UdonBehaviour[] UdonBehavioursFindProgramVariableValue(UdonBehaviour[] _array, string _name, object _value)
+        public static UdonBehaviour[] UdonBehavioursFindProgramVariableValue(UdonBehaviour[] _array, string _name, object _value)
         {
             UdonBehaviour[] _newArray = new UdonBehaviour[0];
             for (int i = 0; i < _array.Length; i++)
@@ -590,7 +586,7 @@ namespace UdonLab.Toolkit
             }
             return _newArray;
         }
-        public int UdonBehavioursIndexName(UdonBehaviour[] _array, string _name)
+        public static int UdonBehavioursIndexName(UdonBehaviour[] _array, string _name)
         {
             for (int i = 0; i < _array.Length; i++)
             {
@@ -599,19 +595,19 @@ namespace UdonLab.Toolkit
             }
             return -1;
         }
-        public int[] UdonBehavioursIndexNameAll(UdonBehaviour[] _array, string _name)
+        public static int[] UdonBehavioursIndexNameAll(UdonBehaviour[] _array, string _name)
         {
             int[] _newArray = new int[0];
             for (int i = 0; i < _array.Length; i++)
             {
                 if (_array[i].name == _name)
                 {
-                    _newArray = intsAdd(_newArray, i);
+                    _newArray = IntsAdd(_newArray, i);
                 }
             }
             return _newArray;
         }
-        public UdonBehaviour[] UdonBehavioursAdd(UdonBehaviour[] _array, UdonBehaviour _value)
+        public static UdonBehaviour[] UdonBehavioursAdd(UdonBehaviour[] _array, UdonBehaviour _value)
         {
             UdonBehaviour[] _newArray = new UdonBehaviour[_array.Length + 1];
             // for (int i = 0; i < _array.Length; i++)
@@ -622,7 +618,7 @@ namespace UdonLab.Toolkit
             _newArray[_array.Length] = _value;
             return _newArray;
         }
-        public UdonBehaviour[] UdonBehavioursAdd2(UdonBehaviour[] _array, UdonBehaviour _value)
+        public static UdonBehaviour[] UdonBehavioursAdd2(UdonBehaviour[] _array, UdonBehaviour _value)
         {
             int index = UdonBehavioursIndex(_array, _value);
             if (index == -1)
@@ -634,7 +630,7 @@ namespace UdonLab.Toolkit
                 return _array;
             }
         }
-        public UdonBehaviour[] UdonBehavioursRemoveIndex(UdonBehaviour[] _array, int index)
+        public static UdonBehaviour[] UdonBehavioursRemoveIndex(UdonBehaviour[] _array, int index)
         {
             if (index < 0 || index >= _array.Length)
             {
@@ -654,7 +650,7 @@ namespace UdonLab.Toolkit
                 return _newArray;
             }
         }
-        public UdonBehaviour[] UdonBehavioursRemove(UdonBehaviour[] _array, UdonBehaviour _value)
+        public static UdonBehaviour[] UdonBehavioursRemove(UdonBehaviour[] _array, UdonBehaviour _value)
         {
             int index = UdonBehavioursIndex(_array, _value);
             if (index == -1)
@@ -667,12 +663,12 @@ namespace UdonLab.Toolkit
             }
         }
         // UdonSharpBehaviour
-        public UdonSharpBehaviour UdonSharpBehavioursFindName(UdonSharpBehaviour[] _array, string _name)
+        public static UdonSharpBehaviour UdonSharpBehavioursFindName(UdonSharpBehaviour[] _array, string _name)
         {
             var index = UdonSharpBehavioursIndexName(_array, _name);
             return index == -1 ? null : _array[index];
         }
-        public UdonSharpBehaviour[] UdonSharpBehavioursFindNameAll(UdonSharpBehaviour[] _array, string _name)
+        public static UdonSharpBehaviour[] UdonSharpBehavioursFindNameAll(UdonSharpBehaviour[] _array, string _name)
         {
             UdonSharpBehaviour[] _newArray = new UdonSharpBehaviour[0];
             for (int i = 0; i < _array.Length; i++)
@@ -684,7 +680,7 @@ namespace UdonLab.Toolkit
             }
             return _newArray;
         }
-        public int UdonSharpBehavioursIndexName(UdonSharpBehaviour[] _array, string _name)
+        public static int UdonSharpBehavioursIndexName(UdonSharpBehaviour[] _array, string _name)
         {
             for (int i = 0; i < _array.Length; i++)
             {
@@ -693,24 +689,24 @@ namespace UdonLab.Toolkit
             }
             return -1;
         }
-        public int[] UdonSharpBehavioursIndexNameAll(UdonSharpBehaviour[] _array, string _name)
+        public static int[] UdonSharpBehavioursIndexNameAll(UdonSharpBehaviour[] _array, string _name)
         {
             int[] _newArray = new int[0];
             for (int i = 0; i < _array.Length; i++)
             {
                 if (_array[i].name == _name)
                 {
-                    _newArray = intsAdd(_newArray, i);
+                    _newArray = IntsAdd(_newArray, i);
                 }
             }
             return _newArray;
         }
-        public UdonSharpBehaviour UdonSharpBehavioursFindTypeName(UdonSharpBehaviour[] _array, string _name)
+        public static UdonSharpBehaviour UdonSharpBehavioursFindTypeName(UdonSharpBehaviour[] _array, string _name)
         {
             var index = UdonSharpBehavioursIndexTypeName(_array, _name);
             return index == -1 ? null : _array[index];
         }
-        public UdonSharpBehaviour[] UdonSharpBehavioursFindTypeNameAll(UdonSharpBehaviour[] _array, string _name)
+        public static UdonSharpBehaviour[] UdonSharpBehavioursFindTypeNameAll(UdonSharpBehaviour[] _array, string _name)
         {
             UdonSharpBehaviour[] _newArray = new UdonSharpBehaviour[0];
             for (int i = 0; i < _array.Length; i++)
@@ -722,7 +718,7 @@ namespace UdonLab.Toolkit
             }
             return _newArray;
         }
-        public int UdonSharpBehavioursIndexTypeName(UdonSharpBehaviour[] _array, string _name)
+        public static int UdonSharpBehavioursIndexTypeName(UdonSharpBehaviour[] _array, string _name)
         {
             for (int i = 0; i < _array.Length; i++)
             {
@@ -731,19 +727,19 @@ namespace UdonLab.Toolkit
             }
             return -1;
         }
-        public int[] UdonSharpBehavioursIndexTypeNameAll(UdonSharpBehaviour[] _array, string _name)
+        public static int[] UdonSharpBehavioursIndexTypeNameAll(UdonSharpBehaviour[] _array, string _name)
         {
             int[] _newArray = new int[0];
             for (int i = 0; i < _array.Length; i++)
             {
                 if (_array[i].GetUdonTypeName() == _name)
                 {
-                    _newArray = intsAdd(_newArray, i);
+                    _newArray = IntsAdd(_newArray, i);
                 }
             }
             return _newArray;
         }
-        public UdonSharpBehaviour[] UdonSharpBehavioursFindProgramVariable(UdonSharpBehaviour[] _array, string _name)
+        public static UdonSharpBehaviour[] UdonSharpBehavioursFindProgramVariable(UdonSharpBehaviour[] _array, string _name)
         {
             UdonSharpBehaviour[] _newArray = new UdonSharpBehaviour[0];
             for (int i = 0; i < _array.Length; i++)
@@ -755,7 +751,7 @@ namespace UdonLab.Toolkit
             }
             return _newArray;
         }
-        public UdonSharpBehaviour[] UdonSharpBehavioursFindProgramVariableValue(UdonSharpBehaviour[] _array, string _name, object _value)
+        public static UdonSharpBehaviour[] UdonSharpBehavioursFindProgramVariableValue(UdonSharpBehaviour[] _array, string _name, object _value)
         {
             UdonSharpBehaviour[] _newArray = new UdonSharpBehaviour[0];
             for (int i = 0; i < _array.Length; i++)
@@ -767,31 +763,31 @@ namespace UdonLab.Toolkit
             }
             return _newArray;
         }
-        public int[] UdonSharpBehavioursIndexProgramVariable(UdonSharpBehaviour[] _array, string _name)
+        public static int[] UdonSharpBehavioursIndexProgramVariable(UdonSharpBehaviour[] _array, string _name)
         {
             int[] _newArray = new int[0];
             for (int i = 0; i < _array.Length; i++)
             {
                 if (_array[i].GetProgramVariable(_name) != null)
                 {
-                    _newArray = intsAdd(_newArray, i);
+                    _newArray = IntsAdd(_newArray, i);
                 }
             }
             return _newArray;
         }
-        public int[] UdonSharpBehavioursIndexProgramVariableValue(UdonSharpBehaviour[] _array, string _name, object _value)
+        public static int[] UdonSharpBehavioursIndexProgramVariableValue(UdonSharpBehaviour[] _array, string _name, object _value)
         {
             int[] _newArray = new int[0];
             for (int i = 0; i < _array.Length; i++)
             {
                 if (_array[i].GetProgramVariable(_name) == _value)
                 {
-                    _newArray = intsAdd(_newArray, i);
+                    _newArray = IntsAdd(_newArray, i);
                 }
             }
             return _newArray;
         }
-        public int UdonSharpBehavioursIndex(UdonSharpBehaviour[] _array, UdonSharpBehaviour _value)
+        public static int UdonSharpBehavioursIndex(UdonSharpBehaviour[] _array, UdonSharpBehaviour _value)
         {
             for (int i = 0; i < _array.Length; i++)
             {
@@ -800,7 +796,7 @@ namespace UdonLab.Toolkit
             }
             return -1;
         }
-        public UdonSharpBehaviour[] UdonSharpBehavioursAdd(UdonSharpBehaviour[] _array, UdonSharpBehaviour _value)
+        public static UdonSharpBehaviour[] UdonSharpBehavioursAdd(UdonSharpBehaviour[] _array, UdonSharpBehaviour _value)
         {
             UdonSharpBehaviour[] _newArray = new UdonSharpBehaviour[_array.Length + 1];
             // for (int i = 0; i < _array.Length; i++)
@@ -811,7 +807,7 @@ namespace UdonLab.Toolkit
             _newArray[_array.Length] = _value;
             return _newArray;
         }
-        public UdonSharpBehaviour[] UdonSharpBehavioursAdd2(UdonSharpBehaviour[] _array, UdonSharpBehaviour _value)
+        public static UdonSharpBehaviour[] UdonSharpBehavioursAdd2(UdonSharpBehaviour[] _array, UdonSharpBehaviour _value)
         {
             int index = UdonSharpBehavioursIndex(_array, _value);
             if (index == -1)
@@ -823,7 +819,7 @@ namespace UdonLab.Toolkit
                 return _array;
             }
         }
-        public UdonSharpBehaviour[] UdonSharpBehavioursRemoveIndex(UdonSharpBehaviour[] _array, int index)
+        public static UdonSharpBehaviour[] UdonSharpBehavioursRemoveIndex(UdonSharpBehaviour[] _array, int index)
         {
             if (index < 0 || index >= _array.Length)
             {
@@ -843,7 +839,7 @@ namespace UdonLab.Toolkit
                 return _newArray;
             }
         }
-        public UdonSharpBehaviour[] UdonSharpBehavioursRemove(UdonSharpBehaviour[] _array, UdonSharpBehaviour _value)
+        public static UdonSharpBehaviour[] UdonSharpBehavioursRemove(UdonSharpBehaviour[] _array, UdonSharpBehaviour _value)
         {
             int index = UdonSharpBehavioursIndex(_array, _value);
             if (index == -1)
@@ -856,7 +852,7 @@ namespace UdonLab.Toolkit
             }
         }
         // bool
-        public bool[] boolsAdd(bool[] _array, bool _value)
+        public static bool[] BoolsAdd(bool[] _array, bool _value)
         {
             bool[] _newArray = new bool[_array.Length + 1];
             // for (int i = 0; i < _array.Length; i++)
@@ -867,7 +863,7 @@ namespace UdonLab.Toolkit
             _newArray[_array.Length] = _value;
             return _newArray;
         }
-        public bool[] boolsRemove(bool[] _array, int index)
+        public static bool[] BoolsRemove(bool[] _array, int index)
         {
             if (index < 0 || index >= _array.Length)
             {
