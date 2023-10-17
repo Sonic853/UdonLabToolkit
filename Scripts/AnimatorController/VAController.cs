@@ -172,9 +172,9 @@ namespace UdonLab.Toolkit
             text.text = stateName;
             var _udonSharpBehaviour = (UdonSharpBehaviour)item.GetComponent(typeof(UdonSharpBehaviour));
             if (_udonSharpBehaviour != null
-            && _udonSharpBehaviour.GetUdonTypeName() == "UdonLab.Toolkit.UdonSendFunctionWithString")
+            && _udonSharpBehaviour.GetUdonTypeName() == "UdonLab.Toolkit.UdonSendFunctionsWithString")
             {
-                var udonSendFunctionWithString = (UdonSendFunctionWithString)_udonSharpBehaviour;
+                var udonSendFunctionWithString = (UdonSendFunctionsWithString)_udonSharpBehaviour;
                 udonSendFunctionWithString.udonBehaviours = udonBehaviours;
                 udonSendFunctionWithString.functionNames = functionNames;
                 udonSendFunctionWithString.valueNames = valueNames;

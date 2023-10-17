@@ -31,10 +31,10 @@ namespace UdonLab.Toolkit
         [Range(0, 3)]
         [SerializeField] private int isOnce = 0;
         /// <summary>
-        /// 放入玩家名字：0：禁用 1：进入 2：退出 3：都放入玩家名字（UdonSendFunctionWithString Only）
+        /// 放入玩家名字：0：禁用 1：进入 2：退出 3：都放入玩家名字（UdonSendFunctionsWithString Only）
         /// </summary>
         [Header("放入玩家名字：0：禁用 1：进入 2：退出 3：都放入玩家名字")]
-        [Tooltip("（UdonSendFunctionWithString Only）")]
+        [Tooltip("（UdonSendFunctionsWithString Only）")]
         [Range(0, 3)]
         [SerializeField] private int sendPlayerName = 0;
         /// <summary>

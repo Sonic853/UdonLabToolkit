@@ -21,10 +21,10 @@ namespace UdonLab.Toolkit
         [Header("只允许本地玩家触发")]
         [SerializeField] private bool isLocalOnly = true;
         /// <summary>
-        /// 放入玩家名字（UdonSendFunctionWithString Only）
+        /// 放入玩家名字（UdonSendFunctionsWithString Only）
         /// </summary>
         [Header("放入玩家名字")]
-        [Tooltip("（UdonSendFunctionWithString Only）")]
+        [Tooltip("（UdonSendFunctionsWithString Only）")]
         [SerializeField] private bool sendPlayerName = false;
         /// <summary>
         /// 只允许触发一次

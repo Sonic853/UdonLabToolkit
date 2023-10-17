@@ -7,7 +7,7 @@ using VRC.Udon;
 
 namespace UdonLab.Toolkit
 {
-    public class UdonSendFunctionWithFloat : UdonSendFunctions
+    public class UdonSendFunctionsWithFloat : UdonSendFunctions
     {
         /// <summary>
         /// 需要调整参数的变量名
