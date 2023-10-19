@@ -94,6 +94,178 @@ namespace UdonLab.Toolkit
                 return StringsRemoveIndex(_array, index);
             }
         }
+        // VRCUrl
+        public static int VRCUrlsFind(VRCUrl[] _array, VRCUrl _value)
+        {
+            for (int i = 0; i < _array.Length; i++)
+            {
+                if (_array[i].ToString() == _value.ToString())
+                    return i;
+            }
+            return -1;
+        }
+        public static int[] VRCUrlsFindAll(VRCUrl[] _array, VRCUrl _value)
+        {
+            int[] _index = new int[0];
+            for (int i = 0; i < _array.Length; i++)
+            {
+                if (_array[i].ToString() == _value.ToString())
+                {
+                    _index = IntsAdd(_index, i);
+                }
+            }
+            return _index;
+        }
+        public static int VRCUrlsIndex(VRCUrl[] _array, VRCUrl _value)
+        {
+            for (int i = 0; i < _array.Length; i++)
+            {
+                if (_array[i].ToString() == _value.ToString())
+                    return i;
+            }
+            return -1;
+        }
+        public static VRCUrl[] VRCUrlsAdd(VRCUrl[] _array, VRCUrl _value)
+        {
+            VRCUrl[] _newArray = new VRCUrl[_array.Length + 1];
+            // for (int i = 0; i < _array.Length; i++)
+            // {
+            //     _newArray[i] = _array[i];
+            // }
+            Array.Copy(_array, _newArray, _array.Length);
+            _newArray[_array.Length] = _value;
+            return _newArray;
+        }
+        public static VRCUrl[] VRCUrlsAdd2(VRCUrl[] _array, VRCUrl _value)
+        {
+            int index = VRCUrlsIndex(_array, _value);
+            if (index == -1)
+            {
+                return VRCUrlsAdd(_array, _value);
+            }
+            else
+            {
+                return _array;
+            }
+        }
+        public static VRCUrl[] VRCUrlsRemoveIndex(VRCUrl[] _array, int index)
+        {
+            if (index < 0 || index >= _array.Length)
+            {
+                return _array;
+            }
+            else
+            {
+                VRCUrl[] _newArray = new VRCUrl[_array.Length - 1];
+                for (int i = 0; i < index; i++)
+                {
+                    _newArray[i] = _array[i];
+                }
+                for (int i = index; i < _array.Length - 1; i++)
+                {
+                    _newArray[i] = _array[i + 1];
+                }
+                return _newArray;
+            }
+        }
+        public static VRCUrl[] VRCUrlsRemove(VRCUrl[] _array, VRCUrl _value)
+        {
+            int index = VRCUrlsIndex(_array, _value);
+            if (index == -1)
+            {
+                return _array;
+            }
+            else
+            {
+                return VRCUrlsRemoveIndex(_array, index);
+            }
+        }
+        // Texture2D
+        public static int Texture2DsFind(Texture2D[] _array, Texture2D _value)
+        {
+            for (int i = 0; i < _array.Length; i++)
+            {
+                if (_array[i] == _value)
+                    return i;
+            }
+            return -1;
+        }
+        public static int[] Texture2DsFindAll(Texture2D[] _array, Texture2D _value)
+        {
+            int[] _index = new int[0];
+            for (int i = 0; i < _array.Length; i++)
+            {
+                if (_array[i] == _value)
+                {
+                    _index = IntsAdd(_index, i);
+                }
+            }
+            return _index;
+        }
+        public static int Texture2DsIndex(Texture2D[] _array, Texture2D _value)
+        {
+            for (int i = 0; i < _array.Length; i++)
+            {
+                if (_array[i] == _value)
+                    return i;
+            }
+            return -1;
+        }
+        public static Texture2D[] Texture2DsAdd(Texture2D[] _array, Texture2D _value)
+        {
+            Texture2D[] _newArray = new Texture2D[_array.Length + 1];
+            // for (int i = 0; i < _array.Length; i++)
+            // {
+            //     _newArray[i] = _array[i];
+            // }
+            Array.Copy(_array, _newArray, _array.Length);
+            _newArray[_array.Length] = _value;
+            return _newArray;
+        }
+        public static Texture2D[] Texture2DsAdd2(Texture2D[] _array, Texture2D _value)
+        {
+            int index = Texture2DsIndex(_array, _value);
+            if (index == -1)
+            {
+                return Texture2DsAdd(_array, _value);
+            }
+            else
+            {
+                return _array;
+            }
+        }
+        public static Texture2D[] Texture2DsRemoveIndex(Texture2D[] _array, int index)
+        {
+            if (index < 0 || index >= _array.Length)
+            {
+                return _array;
+            }
+            else
+            {
+                Texture2D[] _newArray = new Texture2D[_array.Length - 1];
+                for (int i = 0; i < index; i++)
+                {
+                    _newArray[i] = _array[i];
+                }
+                for (int i = index; i < _array.Length - 1; i++)
+                {
+                    _newArray[i] = _array[i + 1];
+                }
+                return _newArray;
+            }
+        }
+        public static Texture2D[] Texture2DsRemove(Texture2D[] _array, Texture2D _value)
+        {
+            int index = Texture2DsIndex(_array, _value);
+            if (index == -1)
+            {
+                return _array;
+            }
+            else
+            {
+                return Texture2DsRemoveIndex(_array, index);
+            }
+        }
         // Int
         public static int IntsFind(int[] _array, int _value)
         {

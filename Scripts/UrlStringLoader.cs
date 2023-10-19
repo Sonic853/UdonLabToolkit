@@ -41,7 +41,10 @@ namespace UdonLab.Toolkit
         }
         public override void OnStringLoadError(IVRCStringDownload result)
         {
+            isLoaded = true;
             Debug.LogError($"UdonLab.Toolkit.UrlStringLoader: Could not load {result.Url} : {result.Error} ");
         }
+        public void SendFunction() => LoadUrl();
+        public void SendFunctions() => LoadUrl();
     }
 }

@@ -37,7 +37,7 @@ namespace UdonLab.Toolkit
         {
             isLoaded = true;
             content = result.Result;
-            if (!string.IsNullOrEmpty(setVariableName))
+            if (!string.IsNullOrWhiteSpace(setVariableName))
                 udonSendFunction.SetProgramVariable(setVariableName, content);
             udonSendFunction.SendCustomEvent(sendCustomEvent);
         }
