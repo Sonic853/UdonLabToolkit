@@ -385,7 +385,7 @@ MonoBehaviour:
       Data: 26|UnityEngine.TooltipAttribute, UnityEngine.CoreModule
     - Name: tooltip
       Entry: 1
-      Data: "\uFF08UdonSendFunctionWithString Only\uFF09"
+      Data: "\uFF08UdonSendFunctionsWithString Only\uFF09"
     - Name: 
       Entry: 8
       Data: 

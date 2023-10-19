@@ -7,18 +7,34 @@ using VRC.Udon;
 
 namespace UdonLab.Toolkit
 {
-    public class UdonSendFunctionsWithString : UdonSendFunctions
+    public class UdonSendFunctionsWithFloat : UdonSendFunctionsValue
     {
-        /// <summary>
-        /// 需要调整参数的变量名
-        /// </summary>
-        [Header("需要调整参数的变量名")]
-        public string[] valueNames;
         /// <summary>
         /// 需要调整参数的值
         /// </summary>
         [Header("需要调整参数的值")]
-        public string[] values;
+        public float[] values;
+        /// <summary>
+        /// 需要调整参数的值
+        /// </summary>
+        public float value
+        {
+            get
+            {
+                if (values == null || values.Length == 0)
+                    return default;
+                return values[0];
+            }
+            set
+            {
+                if (values == null || values.Length == 0)
+                    values = new float[1];
+                for (int i = 0; i < values.Length; i++)
+                {
+                    values[i] = value;
+                }
+            }
+        }
         // /// <summary>
         // /// 只允许本地玩家触发
         // /// </summary>

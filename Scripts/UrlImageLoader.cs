@@ -15,8 +15,8 @@ namespace UdonLab.Toolkit
         public bool loadOnStart = true;
         [NonSerialized] public bool isLoaded = false;
         public UdonBehaviour udonSendFunction;
-        public string sendCustomEvent = "SendFunctions";
-        public string setVariableName = "content";
+        public string sendCustomEvent = "SendFunction";
+        public string setVariableName = "value";
         VRCImageDownloader _imageDownloader;
         void Start()
         {
