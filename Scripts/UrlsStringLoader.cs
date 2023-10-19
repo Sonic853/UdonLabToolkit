@@ -14,7 +14,7 @@ namespace UdonLab.Toolkit
         public VRCUrl[] urls;
         public string[] contents;
         public bool isLoading = false;
-        [NonSerialized] public bool[] isLoaded;
+        [NonSerialized] public bool[] isLoaded = new bool[0];
         public UdonBehaviour[] udonSendFunctions;
         public string[] sendCustomEvents;
         public string[] setVariableNames;
