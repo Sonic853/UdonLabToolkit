@@ -40,9 +40,7 @@ namespace UdonLab.Toolkit
             if (string.IsNullOrEmpty(functionName))
                 return;
             if (!string.IsNullOrEmpty(valueName))
-            {
                 udonBehaviour.SetProgramVariable(valueName, value);
-            }
             udonBehaviour.SendCustomEvent(functionName);
             _isSended = true;
         }
