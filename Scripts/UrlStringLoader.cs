@@ -17,6 +17,8 @@ namespace UdonLab.Toolkit
         public UdonBehaviour udonSendFunction;
         public string sendCustomEvent = "SendFunction";
         public string setVariableName = "value";
+        public bool useBigImg = false;
+        public Texture2D bigImgContent;
         void Start()
         {
             if (loadOnStart)
@@ -35,8 +37,19 @@ namespace UdonLab.Toolkit
         {
             isLoaded = true;
             content = result.Result;
-            if (!string.IsNullOrWhiteSpace(setVariableName))
-                udonSendFunction.SetProgramVariable(setVariableName, content);
+            if (useBigImg)
+            {
+                bigImgContent = new Texture2D(2, 2);
+                var bytes = Convert.FromBase64String(content);
+                bigImgContent.LoadRawTextureData(bytes);
+                if (!string.IsNullOrWhiteSpace(setVariableName))
+                    udonSendFunction.SetProgramVariable(setVariableName, bigImgContent);
+            }
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(setVariableName))
+                    udonSendFunction.SetProgramVariable(setVariableName, content);
+            }
             udonSendFunction.SendCustomEvent(sendCustomEvent);
         }
         public override void OnStringLoadError(IVRCStringDownload result)
