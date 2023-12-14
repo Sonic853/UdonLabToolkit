@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: FollowPlayer
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 7e0dd4968e771854c9d01ba07db36159,
-    type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 7d8e392ea2b86de429db89a2f691b1bc, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 7ea71769305774e448c7aef6cc61cb88, type: 3}

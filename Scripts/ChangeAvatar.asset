@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: ChangeAvatar
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: ca8b5c8ab0fe50246870d10d3c1926ca,
-    type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 05bb90789c381464e99b898388594266, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: a07abd41097072848b099d0c971631f1, type: 3}

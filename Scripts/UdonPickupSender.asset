@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UdonPickupSender
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: b1cfcb86b1065d640adc522245c538cb,
-    type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: a11ce548741c5e749b0b5922168539ae, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 7c3dbb0ce9248004f9a82a3be70d6350, type: 3}

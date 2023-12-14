@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UdonGlobalMusicPlayer
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 1d7d3016a4abbe449bd58fbd25615793,
-    type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 00584446991612249abcec76d3fa4827, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: ded2799e6219b504d917b419038ed0c3, type: 3}

@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UdonSendFunctionWithFloat
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 1d8fd13160b4ead4991245770d0f8e9e,
-    type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: b8bf0c76b85bfa3438ceae32387ad802, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: cc4032de87bc9294d841c1e41eb6046f, type: 3}

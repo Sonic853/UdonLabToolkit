@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: VoiceChatSwitchUseDown
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 2af9a445c94b26f4bb8e8789f78bb730,
-    type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 9dd0b489e94f50d42ae153f020a7178d, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: bd5a1a4c4cd8e1a4e961b4064f781045, type: 3}

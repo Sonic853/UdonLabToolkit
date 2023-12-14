@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UdonInteractTeleport
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 53d3599d1d1237946845756367ac684a,
-    type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 0c4047ca440fb1542af2343b36bc4e1b, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 75a2e97675f35c8459865c4a8350e578, type: 3}

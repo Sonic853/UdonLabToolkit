@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: VoiceChatSwitchPickup
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 7b768c4ea07cfeb438509a607a34c2a7,
-    type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 8bbea1ececafa674081c9323b92dd585, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 4b528134a6acf6745937957998aa9560, type: 3}

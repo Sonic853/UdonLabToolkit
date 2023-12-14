@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: TextureSpliter
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: e7385f29879921d47bdbb96846e600d8,
-    type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: ea7bb0232494a6e4c8c3f132367accf5, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 715d248906a7ba54d842cfa7d406964b, type: 3}

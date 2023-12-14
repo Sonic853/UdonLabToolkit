@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UdonSendFunctionValue
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: c16d4c453f489a0428cbd659053db1fe,
-    type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 1e1c0a0ad55f14b4fa9eb017c5741854, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 7f854ca5177f7a7429a1b60343c6043e, type: 3}

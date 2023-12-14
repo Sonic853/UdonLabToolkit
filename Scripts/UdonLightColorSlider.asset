@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UdonLightColorSlider
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 1589cf45720b7994eb5c1b4e0c6ddfa8,
-    type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 9642e01c8689be042992fd90a95ea4a6, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 28b2fdfd9e3604f4db25d67c383d155e, type: 3}

@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UdonTriggerTimer
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 9e7c9b1dd06b16b4eb9b3817056a4383,
-    type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: bfa87fbf018091f418136cbdaca9bd2c, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: c7204913ca41a2343bda08823fcd4895, type: 3}

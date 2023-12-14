@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UdonInteractFunctionWithString
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 090ae4dc695ca5d40a79775700d497ec,
-    type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 7bc777463c3712d41ba0b1025407b555, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 5548060a47b6ca947bc7abae7cfc1977, type: 3}

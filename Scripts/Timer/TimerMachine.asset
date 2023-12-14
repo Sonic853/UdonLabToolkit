@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: TimerMachine
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: baa7238dcdcda39499ff91e9e7d4da94,
-    type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: e6a736ef5e7ee8c498e35315f36f3e07, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: b9398d90672586244bafc0b531a20328, type: 3}

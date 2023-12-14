@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: LightController
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 25fbc6e23dfa82345a97b5746f7e0ba4,
-    type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: f125aa2cb33bbd040822595976cb9600, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: e16253372ec5b594b9c158202978867a, type: 3}

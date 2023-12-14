@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: PinChecker
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 2c521e338d5a46d42962aa15ad27ff16,
-    type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: e1a42d50e17e9834eb7e397cd2e7d2ff, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: d67550fca646c5446b167ddc48f4471b, type: 3}

@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UdonPickupFunctions
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: b040c905e83fb63429310bd008c4e9ce,
-    type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: cc913f6ddec883640a7cdcb2c6e9f931, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: 462a5f20148049049af7579f9c6767fa, type: 3}
