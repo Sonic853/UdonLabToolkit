@@ -115,7 +115,7 @@ MonoBehaviour:
       Data: 6|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: UdonLab.Toolkit.ImageDisplayer[], Assembly-CSharp
+      Data: UdonLab.Toolkit.ImageDisplayer[], UdonLab.Toolkit
     - Name: 
       Entry: 8
       Data: 

@@ -61,7 +61,7 @@ MonoBehaviour:
       Data: 3|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: UdonLab.Toolkit.UdonGlobalMusicPlayer, Assembly-CSharp
+      Data: UdonLab.Toolkit.UdonGlobalMusicPlayer, UdonLab.Toolkit
     - Name: 
       Entry: 8
       Data: 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UrlBigImageLoader
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: e7187a5ad0e5acc4f862ac014441487d, type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 4c9d6e055d899d749951b7505d5ca8f8, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: deac49b03f573164ea87f0f33060437b, type: 3}

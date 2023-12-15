@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UrlsStringLoader
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: bc8db5e0fb560e841af8562e3bdf3de9, type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 793e5b27bbccd824db7394f2a96f8802, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: f932c680a7fb51a4a9f6129fb19aed4c, type: 3}
