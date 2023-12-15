@@ -55,7 +55,8 @@ namespace UdonLab.Toolkit
             contents[0] = result.Result;
             if (!string.IsNullOrWhiteSpace(setVariableNames[0]))
                 udonSendFunctions[0].SetProgramVariable(setVariableNames[0], contents[0]);
-            udonSendFunctions[0].SendCustomEvent(sendCustomEvents[0]);
+            if (!string.IsNullOrWhiteSpace(sendCustomEvents[0]))
+                udonSendFunctions[0].SendCustomEvent(sendCustomEvents[0]);
             DelUrl();
             if (urls.Length > 0)
                 LoadUrl();
@@ -63,10 +64,12 @@ namespace UdonLab.Toolkit
         public override void OnImageLoadError(IVRCImageDownload result)
         {
             isLoading = false;
-            Debug.LogError($"UdonLab.Toolkit.UrlsImageLoader: Could not load {result.Url} : {result.ErrorMessage} ");
+            Debug.LogError($"UdonLab.Toolkit.UrlsImageLoader: {result.Error} Could not load {result.Url} : {result.ErrorMessage}");
             DelUrl();
             if (urls.Length > 0)
                 LoadUrl();
         }
+        public void SendFunction() => LoadUrl();
+        public void SendFunctions() => LoadUrl();
     }
 }

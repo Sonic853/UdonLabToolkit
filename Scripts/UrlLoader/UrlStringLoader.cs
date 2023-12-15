@@ -17,8 +17,6 @@ namespace UdonLab.Toolkit
         public UdonBehaviour udonSendFunction;
         public string sendCustomEvent = "SendFunction";
         public string setVariableName = "value";
-        public bool useBigImg = false;
-        public Texture2D bigImgContent;
         void Start()
         {
             if (loadOnStart)
@@ -37,25 +35,15 @@ namespace UdonLab.Toolkit
         {
             isLoaded = true;
             content = result.Result;
-            if (useBigImg)
-            {
-                bigImgContent = new Texture2D(2, 2);
-                var bytes = Convert.FromBase64String(content);
-                bigImgContent.LoadRawTextureData(bytes);
-                if (!string.IsNullOrWhiteSpace(setVariableName))
-                    udonSendFunction.SetProgramVariable(setVariableName, bigImgContent);
-            }
-            else
-            {
-                if (!string.IsNullOrWhiteSpace(setVariableName))
-                    udonSendFunction.SetProgramVariable(setVariableName, content);
-            }
-            udonSendFunction.SendCustomEvent(sendCustomEvent);
+            if (!string.IsNullOrWhiteSpace(setVariableName))
+                udonSendFunction.SetProgramVariable(setVariableName, content);
+            if (!string.IsNullOrWhiteSpace(sendCustomEvent))
+                udonSendFunction.SendCustomEvent(sendCustomEvent);
         }
         public override void OnStringLoadError(IVRCStringDownload result)
         {
             isLoaded = true;
-            Debug.LogError($"UdonLab.Toolkit.UrlStringLoader: Could not load {result.Url} : {result.Error} ");
+            Debug.LogError($"UdonLab.Toolkit.UrlStringLoader: {result.ErrorCode} Could not load {result.Url} with error: {result.Error}");
         }
         public void SendFunction() => LoadUrl();
         public void SendFunctions() => LoadUrl();
