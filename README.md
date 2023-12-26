@@ -1,3 +1,5 @@
+# DEPRECATED. If you wish to use the code, please do not copy it directly.
+
 # UdonLabToolkit
 
 853's Udon Lab Toolkit
